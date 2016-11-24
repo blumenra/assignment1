@@ -1,2 +1,11 @@
-bla bla
-
+Hand:
+	void reciveCards(vector<Card* card>){
+		bool addCard(card& card){
+			vactor<int> findCardPlace(Card& card){
+				vector<int> findCardsByValue(Card& card);
+				int findPlaceByShape(Card& card, int vec, int begin, int end);
+			}
+			boolean isPlaceInsideVector(int vec, int index);
+		}
+	}ls
+	dsa
