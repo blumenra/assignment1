@@ -1,5 +1,5 @@
 Hand:
-	void reciveCards(vector<Card*> card){
+	void receiveCards(vector<Card*> card){
 		bool addCard(card& card){
 			vactor<int> findCardPlace(Card& card){
 				vector<int> findCardsByValue(Card& card);
