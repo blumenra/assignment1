@@ -1,0 +1,74 @@
+#include "../include/Card.h"
+
+// Card constructor
+Card::Card(Shape shape): shape(shape) {}
+
+Shape Card::getShape() const {
+	return this->shape;
+}
+
+string Card::shapeToString(Shape shape) {
+	
+	switch(shape) {
+		case Club:
+			return "C";
+		case Diamond:
+			return "D";
+		case Heart:
+			return "H";
+		case Spade:
+			return "S";
+		default:
+			throw "The shape is invalid!!!";
+	}
+}
+
+Card::~Card() {}
+
+// FigureCard constructor
+FigureCard::FigureCard(Shape shape, Figure figure): Card(shape), figure(figure) {}
+
+Figure FigureCard::getFigure() const {
+	return this->figure;
+}
+
+string FigureCard::toString() {
+
+	string strFigure = figureToString(this->figure);
+	string strShape = shapeToString(this->getShape());
+	string strCard = strFigure + strShape;
+
+	return strCard;
+}
+
+string FigureCard::figureToString(Figure figure) const {
+		
+	switch(figure) {
+		case Jack:
+			return "J";
+		case Queen:
+			return "Q";
+		case King:
+			return "K";
+		case Ace:
+			return "A";
+		default:
+			throw "The figure is invalid!!!";
+	}
+}
+
+// NumericCard constructor
+NumericCard::NumericCard(Shape shape, int number): Card(shape), number(number) {}
+
+int NumericCard::getNumber() const {
+	return this->number;
+}
+
+string NumericCard::toString() {
+
+	string strnNumber = "" + this->number;
+	string strShape = shapeToString(this->getShape());
+	string strCard = strnNumber + strShape;
+
+	return strCard;
+}
