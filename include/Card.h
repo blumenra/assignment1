@@ -27,6 +27,7 @@ public:
  	Shape getShape() const;
  	string shapeToString(Shape shape);
  	virtual ~Card();
+ 	virtual string getStrValue() = 0;
 };
 
 class FigureCard : public Card {
@@ -35,7 +36,7 @@ private:
 	string figureToString(Figure figure) const;
 public:
 	FigureCard(Shape shape, Figure figure);
-	Figure getFigure() const;
+	string getStrValue();
 	virtual string toString() override;
 };
 
@@ -44,7 +45,7 @@ private:
 	int number;
 public:
 	NumericCard(Shape shape, int number);
-	int getNumber() const;
+	string getStrValue();
 	virtual string toString() override;
 };
 
