@@ -28,8 +28,8 @@ Card::~Card() {}
 // FigureCard constructor
 FigureCard::FigureCard(Shape shape, Figure figure): Card(shape), figure(figure) {}
 
-Figure FigureCard::getFigure() const {
-	return this->figure;
+string FigureCard::getStrValue() {
+	return this->toString().substr(0, toString().length()-1);
 }
 
 string FigureCard::toString() {
@@ -60,13 +60,13 @@ string FigureCard::figureToString(Figure figure) const {
 // NumericCard constructor
 NumericCard::NumericCard(Shape shape, int number): Card(shape), number(number) {}
 
-int NumericCard::getNumber() const {
-	return this->number;
+string NumericCard::getStrValue() {
+	return this->toString().substr(0, toString().length()-1);
 }
 
 string NumericCard::toString() {
 
-	string strnNumber = "" + this->number;
+	string strnNumber = to_string(this->number);
 	string strShape = shapeToString(this->getShape());
 	string strCard = strnNumber + strShape;
 
