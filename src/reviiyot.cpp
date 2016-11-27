@@ -21,22 +21,18 @@ Figure figure(Ace);
 cout << "creating new figureCard.." << endl;
 Card* figuredCard = new FigureCard(shape, figure);
 
-cout << "toString of card: " << endl;
-cout << figuredCard->toString() << endl;
+cout << "toString of card: " << figuredCard->toString() + "\n" << endl;
 
-cout << "getFigure.." << endl;
-cout << figuredCard->getFigure() << endl;
+cout << "getFigure: " << figuredCard->getStrValue() + "\n" << endl;
 
 
 
 cout << "creating new numericCard.." << endl;
-Card* numericCard = new NumericCard(shape, 4);
+Card* numericCard = new NumericCard(shape, 1234);
 
-cout << "toString of card: " << endl;
-cout << numericCard->toString() << endl;
+cout << "toString of card: " << numericCard->toString() + "\n" << endl;
 
-cout << "getNumber.." << endl;
-cout << numericCard->getNumber() << endl;
+cout << "getStrNumber of numericCard:" << numericCard->getStrValue() + "\n" << endl;
 
 	// char* configurationFile = argv[1];
 
