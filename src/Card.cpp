@@ -19,7 +19,7 @@ string Card::shapeToString(Shape shape) {
 		case Spade:
 			return "S";
 		default:
-			throw "The shape is invalid!!!";
+			throw invalid_argument("The shape is invalid!!!");
 	}
 }
 
@@ -53,7 +53,7 @@ string FigureCard::figureToString(Figure figure) const {
 		case Ace:
 			return "A";
 		default:
-			throw "The figure is invalid!!!";
+			throw invalid_argument("The figure is invalid!!!");
 	}
 }
 
