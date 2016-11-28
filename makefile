@@ -5,10 +5,10 @@ CC = g++
 all: reviiyot
 
 # Executable "hello" depends on the files hello.o and run.o.
-reviiyot: bin/reviiyot.o    bin/Card.o
+reviiyot: bin/reviiyot.o    bin/Card.o   bin/Deck.o
 	@echo 'Building target: reviiyot'
 	@echo 'Invoking: C++ Linker'
-	$(CC) -o bin/reviiyot      bin/reviiyot.o     bin/Card.o
+	$(CC) -o bin/reviiyot      bin/reviiyot.o     bin/Card.o     bin/Deck.o
 	@echo 'Finished building target: reviiyot'
 	@echo ' '
 
@@ -19,6 +19,10 @@ bin/reviiyot.o:   src/reviiyot.cpp
 # Depends on the source and header files 
 bin/Card.o:  src/Card.cpp   include/Card.h
 	$(CC) $(CFLAGS)  -c  -Linclude  -o  bin/Card.o    src/Card.cpp
+
+#Depends on the source and header files 
+bin/Deck.o:  src/Deck.cpp   include/Deck.h
+	$(CC) $(CFLAGS)  -c  -Linclude  -o  bin/Deck.o    src/Deck.cpp
 
 #Clean the build directory
 clean: 
