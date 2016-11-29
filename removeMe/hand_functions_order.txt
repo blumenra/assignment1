@@ -10,17 +10,18 @@ Hand:
 	}
 
 	vector<Card*> giveCardsOfType(Card& card){
-		vector<int> findCardsByValue(Card& card);
+		---vector<int> findCardsByValue(Card& card);
 	}
+
 
 	int howManyOfValue(int num);
 
 	int howManyOfValue(Figure figure);
 
-	boolean isHandEmpty();
+	---boolean isHandEmpty();
 
 	boolean removeCard(Card& card);
 
-	int getNumberOfCards();
+	---int getNumberOfCards();
 
-	string toString();
+	---string toString();
