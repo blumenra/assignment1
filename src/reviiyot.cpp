@@ -5,6 +5,7 @@
 
 #include "../include/Card.h"
 #include "../include/Deck.h"
+#include "../include/Hand.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main(int argc, char **argv) {
 
 	// cardTest();
 	// deckTest();
-
+	handTest();
 
 	cout << "Exiting main" << endl;
 
@@ -83,6 +84,10 @@ void cardTest() {
 	cout << "toString of card (numeric): " << numericCard->toString() + "\n" << endl;
 
 	cout << "getStrNumber of numericCard:" << numericCard->getStrValue() + "\n" << endl;
+
+
+
+	cout << "Exiting cardTest!" << endl;
 
 }
 
@@ -150,8 +155,53 @@ void deckTest() {
 
 	cout << "Deck: " << deck.toString() << endl;
 
+
+
+	cout << "Exiting deckTest!" << endl;
+
 }
 
 void handTest() {
 
+	Shape shapeC(Club);
+	Shape shapeD(Diamond);
+	Shape shapeH(Heart);
+	Shape shapeS(Spade);
+
+	Figure figureJ(Jack);
+	Figure figureQ(Queen);
+	Figure figureK(King);
+	Figure figureA(Ace);
+
+	// CARDS CREATIONS ---------
+	cout << "Creating figure cards" << endl;
+	Card* figuredCard3 = new FigureCard(shapeS, figureK);
+	Card* figuredCard4 = new FigureCard(shapeD, figureA);
+	Card* figuredCard2 = new FigureCard(shapeS, figureQ);
+	Card* figuredCard1 = new FigureCard(shapeC, figureJ);
+
+	cout << "Creating numeirc cards" << endl;
+	Card* numericCard1 = new NumericCard(shapeC, 2);
+	Card* numericCard2 = new NumericCard(shapeH, 11);
+	// CARDS CREATIONS ---------
+
+	vector<Card*> figureCards;
+	vector<Card*> numericCards;
+
+	figureCards.push_back(figuredCard1);
+	figureCards.push_back(figuredCard2);
+	figureCards.push_back(figuredCard3);
+	figureCards.push_back(figuredCard4);
+
+	numericCards.push_back(numericCard1);
+	numericCards.push_back(numericCard2);
+
+	cout << "creating a hand with the above cards.." << endl;
+
+	Hand hand(figureCards, numericCards);
+
+
+	cout << "hand toString result: " << hand.toString() << endl;
+
+	cout << "Exiting handTest!" << endl;
 }

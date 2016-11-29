@@ -2,6 +2,7 @@
 #define HAND_H_
 
 #include <iostream>
+#include <vector>
 
 #include "Card.h"
 
@@ -9,8 +10,13 @@ using namespace std;
 
 class Hand {
 private:
+	vector<Card*> figureHand;
+	vector<Card*> numericHand;
+
 	// Declare here the collection of "Card *" of the hand
 public:
+	Hand(vector<Card*>& figureHand, vector<Card*>& numericHand);
+	// Hand(vector<Card*>&); // The right constructor!!!
 	bool addCard(Card &card);
 	bool removeCard(Card &card);
 	int getNumberOfCards(); // Get the number of cards in hand
