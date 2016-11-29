@@ -200,8 +200,11 @@ void handTest() {
 
 	Hand hand(figureCards, numericCards);
 
-
+	//toString
 	cout << "hand toString result: " << hand.toString() << endl;
+
+	//getNumberOfCards
+	cout << "hand getNumberOfCards result: " << hand.getNumberOfCards() << endl;
 
 	cout << "Exiting handTest!" << endl;
 }

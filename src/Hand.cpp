@@ -4,6 +4,13 @@ Hand::Hand(vector<Card*>& figureHand, vector<Card*>& numericHand)
 : figureHand(figureHand), numericHand(numericHand)
 {}
 
+int Hand::getNumberOfCards() {
+	int numOfFigureCards = figureHand.size();
+	int numOfNumericCards = numericHand.size();
+
+	return numOfFigureCards + numOfNumericCards;
+}
+
 string Hand::toString() {
 
 	string strHand;
