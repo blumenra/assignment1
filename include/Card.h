@@ -2,6 +2,9 @@
 #define CARD_H_
 
 #include <iostream>
+#include <vector>
+// #include "Hand.h"
+
 using namespace std;
 
 enum Shape {
@@ -18,6 +21,7 @@ enum Figure {
 	Ace
 };
 
+class Hand;
 class Card {
 private:
   	Shape shape;
@@ -28,6 +32,7 @@ public:
  	string shapeToString(Shape shape);
  	virtual ~Card();
  	virtual string getStrValue() = 0;
+ 	virtual vector<int> valuateMe(Hand& hand) = 0;
 };
 
 class FigureCard : public Card {
@@ -38,6 +43,7 @@ public:
 	FigureCard(Shape shape, Figure figure);
 	string getStrValue();
 	virtual string toString() override;
+	vector<int> valuateMe(Hand& hand) override;
 };
 
 class NumericCard : public Card {
@@ -47,6 +53,7 @@ public:
 	NumericCard(Shape shape, int number);
 	string getStrValue();
 	virtual string toString() override;
+	vector<int> valuateMe(Hand& hand) override;
 };
 
 #endif

@@ -1,4 +1,6 @@
 #include "../include/Hand.h"
+#include "../include/Card.h"
+
 
 Hand::Hand(vector<Card*>& figureHand, vector<Card*>& numericHand)
 : figureHand(figureHand), numericHand(numericHand)
@@ -27,4 +29,14 @@ string Hand::toString() {
 	string strHandNoLastSpace = strHand.substr(0, strHandLength-1);
 	return strHandNoLastSpace;
 
+}
+
+bool Hand::isEmpty() {
+	
+	return getNumberOfCards() == 0;
+}
+
+vector<int> Hand::findCardsByValue(Card& card) {
+
+	return card.valuateMe(*this);
 }

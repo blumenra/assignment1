@@ -1,4 +1,6 @@
 #include "../include/Card.h"
+#include "../include/Hand.h"
+
 
 // Card constructor
 Card::Card(Shape shape): shape(shape) {}
@@ -57,6 +59,10 @@ string FigureCard::figureToString(Figure figure) const {
 	}
 }
 
+vector<int> FigureCard::valuateMe(Hand& hand) {
+	return hand.findCardsByValue(*this);
+}
+
 // NumericCard constructor
 NumericCard::NumericCard(Shape shape, int number): Card(shape), number(number) {}
 
@@ -71,4 +77,8 @@ string NumericCard::toString() {
 	string strCard = strnNumber + strShape;
 
 	return strCard;
+}
+
+vector<int> NumericCard::valuateMe(Hand& hand) {
+	return hand.findCardsByValue(*this);
 }
