@@ -36,73 +36,7 @@ bool Hand::isEmpty() {
 	return getNumberOfCards() == 0;
 }
 
-vector<int> Hand::findCardsByValue(Card& card) {
-
-	return card.valuateMe(*this);
-}
-
-vector<int> Hand::findCardsByValue(FigureCard& card) {
-	
-	vector<int> valuePlacements;
-	valuePlacements.push_back(0); // figureHand is the value 0
-
-	for(unsigned int i = 0; i < figureHand.size(); i++){
-		if((compareFigures(card.getStrValue(), figureHand[i]->getStrValue())) == 0) {
-			valuePlacements.push_back(i);
-			int lastIndex = i;
-			for(unsigned int j = i+1; j < figureHand.size(); j++) {
-				// cout << "compare: " << (compareFigures(card.getStrValue(), figureHand[j]->getStrValue())) << endl;
-				cout << "card.getStrValue(): " << card.getStrValue() << endl;
-				cout << "figureHand[j]->getStrValue(): " << figureHand[j]->getStrValue() << endl;
-				if((compareFigures(card.getStrValue(), figureHand[j]->getStrValue())) == 0 ) {
-					cout << "j: " << j << endl;
-					lastIndex = j;
-				}
-				else {
-					cout << "break" << endl;
-					break;
-				}
-			}
-			valuePlacements.push_back(lastIndex);
-			return valuePlacements;
-		}
-		else if((compareFigures(card.getStrValue(), figureHand[i]->getStrValue())) < 0) {
-			cout << "if >" << endl;
-			valuePlacements.push_back(i);
-			valuePlacements.push_back(-1);
-			return valuePlacements;
-		}
-	}
-
-	valuePlacements.push_back(figureHand.size()-1);
-	valuePlacements.push_back(-1); // -1 means didnt find a card of the same value
-
-
-
-	return valuePlacements;
-}
-
-int Hand::compareFigures(string receivedFigure, string inHandFigure) {
-
-	return convertFigureToIndex(receivedFigure) - convertFigureToIndex(inHandFigure);
-
-}
-
 int Hand::convertFigureToIndex(string figure) {
-
-	// switch(figure) {
-	// 	case 'J':
-	// 		return 1;
-	// 	case 'Q':
-	// 		return 2;
-	// 	case 'K':
-	// 		return 3;
-	// 	case 'A':
-	// 		return 4;
-	// 	default:
-	// 		throw invalid_argument("The figure is invalid!!!");
-	// }
-
 
 	if(figure == "J") {
 		return 1;
@@ -120,18 +54,15 @@ int Hand::convertFigureToIndex(string figure) {
 		throw invalid_argument("The figure is invalid!!!");
 	}
 
-
-
-
 }
 
-int Hand::compareShapes(Shape receivedShape, Shape inHandShape) {
-	return convertShapeToIndex(receivedShape) - convertShapeToIndex(inHandShape);
+int Hand::convertNumberToIndex(string number) {
+	
+	return stoi(number);
 }
-
 
 int Hand::convertShapeToIndex(Shape shape) {
-		switch(shape) {
+	switch(shape) {
 		case Club:
 			return 1;
 		case Diamond:
@@ -145,17 +76,120 @@ int Hand::convertShapeToIndex(Shape shape) {
 	}
 }
 
+int Hand::compareShapes(Shape receivedShape, Shape inHandShape) {
+	
+	return convertShapeToIndex(receivedShape) - convertShapeToIndex(inHandShape);
+}
+
+int Hand::compareFigures(string receivedFigure, string inHandFigure) {
+
+	return convertFigureToIndex(receivedFigure) - convertFigureToIndex(inHandFigure);
+}
+
 int Hand::compareNumbers(string receivedNumber, string inHandNumber) {
 	
 	return convertNumberToIndex(receivedNumber) - convertNumberToIndex(inHandNumber);
 }
 
-int Hand::convertNumberToIndex(string number) {
-	
-	return stoi(number);
+vector<int> Hand::findCardsByValue(Card& card) {
+
+	return card.valuateMe(*this);
 }
 
-vector<int> findCardsByValue(NumericCard& card) {
-	vector<int> vec;
-	return vec;
+vector<int> Hand::findCardsByValue(FigureCard& card) {
+	
+	cout << numericHand.size() << endl;
+	vector<int> valuePlacements;
+	valuePlacements.push_back(0); // figureHand is the value 0
+
+	for(unsigned int i = 0; i < figureHand.size(); i++){
+		if((compareFigures(card.getStrValue(), figureHand[i]->getStrValue())) == 0) {
+			valuePlacements.push_back(i);
+			int lastIndex = i;
+			for(unsigned int j = i+1; j < figureHand.size(); j++) {
+				if((compareFigures(card.getStrValue(), figureHand[j]->getStrValue())) == 0 ) {
+					lastIndex = j;
+				}
+				else {
+					break;
+				}
+			}
+			valuePlacements.push_back(lastIndex);
+			return valuePlacements;
+		}
+		else if((compareFigures(card.getStrValue(), figureHand[i]->getStrValue())) < 0) {
+			valuePlacements.push_back(i);
+			valuePlacements.push_back(-1);
+			return valuePlacements;
+		}
+	}
+
+	valuePlacements.push_back(figureHand.size());
+	valuePlacements.push_back(-1); // -1 means didnt find a card of the same value
+	return valuePlacements;
+}
+
+vector<int> Hand::findCardsByValue(NumericCard& card) {
+	vector<int> valuePlacements;
+	valuePlacements.push_back(1); // numericHand is the value 1
+	cout << numericHand.size() << endl;
+
+	for(unsigned int i = 0; i < numericHand.size(); i++){
+		if((compareNumbers(card.getStrValue(), numericHand[i]->getStrValue())) == 0) {
+			valuePlacements.push_back(i);
+			int lastIndex = i;
+			for(unsigned int j = i+1; j < numericHand.size(); j++) {
+				if((compareNumbers(card.getStrValue(), numericHand[j]->getStrValue())) == 0 ) {
+					lastIndex = j;
+				}
+				else {
+					break;
+				}
+			}
+			valuePlacements.push_back(lastIndex);
+			return valuePlacements;
+		}
+		else if((compareNumbers(card.getStrValue(), numericHand[i]->getStrValue())) < 0) {
+			valuePlacements.push_back(i);
+			valuePlacements.push_back(-1);
+			return valuePlacements;
+		}
+	}
+
+	valuePlacements.push_back(numericHand.size());
+	valuePlacements.push_back(-1); // -1 means didnt find a card of the same value
+	return valuePlacements;
+}
+
+int Hand::findPlaceByShape(Card& card, int vec, int begin, int end) {
+	int shapePlacement;
+	vector<Card*> subHand;
+
+	switch(vec) {
+		case 0:
+			subHand = figureHand;
+			break;
+		case 1:
+			subHand = numericHand;
+			break;
+		default:
+			throw invalid_argument("The sub-hand is invalid!!!");
+	}
+
+
+	for(int i = begin; i <= end; i++){
+		if((compareShapes(card.getShape(), subHand[i]->getShape())) == 0) {
+			throw invalid_argument("Two identicle CARDS where found!!!");		
+		}
+		else if((compareShapes(card.getShape(), subHand[i]->getShape())) < 0) {
+			cout << "card: " << card.toString() << endl;
+			cout << "getShape: " << subHand[i]->toString() << endl;
+			shapePlacement = i;
+			return shapePlacement;
+		}
+	}
+
+	shapePlacement = end + 1;
+
+	return shapePlacement;
 }

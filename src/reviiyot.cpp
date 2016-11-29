@@ -176,14 +176,16 @@ void handTest() {
 
 	// CARDS CREATIONS ---------
 	cout << "Creating figure cards" << endl;
-	Card* figuredCard3 = new FigureCard(shapeS, figureK);
+	Card* figuredCard3 = new FigureCard(shapeC, figureK);
 	Card* figuredCard4 = new FigureCard(shapeD, figureA);
 	Card* figuredCard2 = new FigureCard(shapeS, figureQ);
 	Card* figuredCard1 = new FigureCard(shapeC, figureJ);
 
 	cout << "Creating numeirc cards" << endl;
 	Card* numericCard1 = new NumericCard(shapeC, 2);
-	Card* numericCard2 = new NumericCard(shapeH, 11);
+	Card* numericCard3 = new NumericCard(shapeH, 11);
+	Card* numericCard2 = new NumericCard(shapeS, 2);
+
 	// CARDS CREATIONS ---------
 
 	vector<Card*> figureCards;
@@ -196,6 +198,7 @@ void handTest() {
 
 	numericCards.push_back(numericCard1);
 	numericCards.push_back(numericCard2);
+	numericCards.push_back(numericCard3);
 
 	cout << "creating a hand with the above cards.." << endl;
 
@@ -218,8 +221,9 @@ void handTest() {
 	//findCardsByValue
 
 	figureCards.pop_back();
-	Card* figuredCardK = new FigureCard(shapeC, figureK);
-	figureCards.push_back(figuredCardK);
+	Card* figuredCardH = new FigureCard(shapeH, figureK);
+	Card* figuredCardKS = new FigureCard(shapeS, figureK);
+	figureCards.push_back(figuredCardH);
 	figureCards.erase(figureCards.begin());
 	Hand hand3(figureCards, numericCards);
 	
@@ -230,16 +234,22 @@ void handTest() {
 	Card* figuredCardA = new FigureCard(shapeC, figureA);
 
 
-	cout << "hand findCardsByValue vector content: ";
-	printIntVector(hand3.findCardsByValue(*figuredCardJ));
+
+
+	Card* numericCard22 = new NumericCard(shapeH, 2);
+	Card* numericCard212 = new NumericCard(shapeH, 12);
+	Card* numericCard28 = new NumericCard(shapeH, 8);
+
+	// cout << "hand findCardsByValue vector content: ";
+	// printIntVector(hand3.findCardsByValue(*figuredCardJ));
 	// cout << "hand findCardsByValue vector content: ";
 	// printIntVector(hand3.findCardsByValue(*figuredCardQ));
 	// cout << "hand findCardsByValue vector content: ";
-	// printIntVector(hand3.findCardsByValue(*figuredCardK2));
+	// printIntVector(hand3.findCardsByValue(*figuredCardA));
 
 	cout << "hand findCardsByValue vector content: ";
-	printIntVector(hand3.findCardsByValue(*figuredCardA));
-
+	printIntVector(hand3.findCardsByValue(*figuredCardKS));
+	cout << "hand findCardsByShape index value: " << hand3.findPlaceByShape(*figuredCardKS, 0, 1, 2) << endl;
 
 
 	cout << "Exiting handTest!" << endl;

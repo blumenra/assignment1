@@ -33,7 +33,8 @@ public:
 	int compareNumbers(string receivedNumber, string inHandNumber);
 	vector<int> findCardsByValue(Card& card);
 	vector<int> findCardsByValue(FigureCard& card);
-	// vector<int> findCardsByValue(NumericCard& card);
+	vector<int> findCardsByValue(NumericCard& card);
+	int findPlaceByShape(Card& card, int vec, int begin, int end);
 };
 
 #endif
