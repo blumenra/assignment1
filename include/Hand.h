@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-// #include "Card.h"
+#include "Card.h"
 
 using namespace std;
 
@@ -25,9 +25,15 @@ public:
 	int getNumberOfCards(); // Get the number of cards in hand
 	string toString(); // Return a list of the cards, separated by space, in one line, in a sorted order, ex: "2S 5D 10H"
 	bool isEmpty();
+	int convertFigureToIndex(string figure);
+	int convertNumberToIndex(string number);
+	int convertShapeToIndex(Shape shape);
+	int compareShapes(Shape receivedShape, Shape inHandShape);
+	int compareFigures(string receivedFigure, string inHandFigure);
+	int compareNumbers(string receivedNumber, string inHandNumber);
 	vector<int> findCardsByValue(Card& card);
 	vector<int> findCardsByValue(FigureCard& card);
-	vector<int> findCardsByValue(NumericCard& card);
+	// vector<int> findCardsByValue(NumericCard& card);
 };
 
 #endif

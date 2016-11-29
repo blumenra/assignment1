@@ -9,6 +9,7 @@
 
 using namespace std;
 
+void printIntVector(vector<int> vec);
 void cardTest();
 void deckTest();
 void handTest();
@@ -210,20 +211,43 @@ void handTest() {
 	vector<Card*> figureCardsVec1;
 	vector<Card*> numericCardsVec2;
 
-	// figureCardsVec1.push_back(figuredCard1);
-	// numericCardsVec2.push_back(numericCard2);
-
 	Hand hand2(figureCardsVec1, numericCardsVec2);
 
-	cout << "hand1 isEmpty before pop result: " << hand2.isEmpty() << endl;
+	cout << "hand1 isEmpty result: " << hand2.isEmpty() << endl;
 
-	// figureCardsVec1.pop_back();
-	// numericCardsVec2.pop_back();
+	//findCardsByValue
 
-	cout << "hand1 isEmpty after pop result: " << hand2.isEmpty() << endl;
+	figureCards.pop_back();
+	Card* figuredCardK = new FigureCard(shapeC, figureK);
+	figureCards.push_back(figuredCardK);
+	figureCards.erase(figureCards.begin());
+	Hand hand3(figureCards, numericCards);
+	
+	cout << "\n" + hand3.toString() << endl;
+	Card* figuredCardJ = new FigureCard(shapeS, figureJ);
+	Card* figuredCardQ = new FigureCard(shapeD, figureQ);
+	Card* figuredCardK2 = new FigureCard(shapeD, figureK);
+	Card* figuredCardA = new FigureCard(shapeC, figureA);
 
+
+	cout << "hand findCardsByValue vector content: ";
+	printIntVector(hand3.findCardsByValue(*figuredCardJ));
+	// cout << "hand findCardsByValue vector content: ";
+	// printIntVector(hand3.findCardsByValue(*figuredCardQ));
+	// cout << "hand findCardsByValue vector content: ";
+	// printIntVector(hand3.findCardsByValue(*figuredCardK2));
+
+	cout << "hand findCardsByValue vector content: ";
+	printIntVector(hand3.findCardsByValue(*figuredCardA));
 
 
 
 	cout << "Exiting handTest!" << endl;
+}
+
+void printIntVector(vector<int> vec) {
+	for(vector<int>::iterator it = vec.begin() ; it != vec.end(); it++){
+		cout << to_string(*it) + " ";
+	}
+	cout << endl;
 }
