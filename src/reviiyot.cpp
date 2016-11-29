@@ -206,5 +206,24 @@ void handTest() {
 	//getNumberOfCards
 	cout << "hand getNumberOfCards result: " << hand.getNumberOfCards() << endl;
 
+	//isEmpty
+	vector<Card*> figureCardsVec1;
+	vector<Card*> numericCardsVec2;
+
+	// figureCardsVec1.push_back(figuredCard1);
+	// numericCardsVec2.push_back(numericCard2);
+
+	Hand hand2(figureCardsVec1, numericCardsVec2);
+
+	cout << "hand1 isEmpty before pop result: " << hand2.isEmpty() << endl;
+
+	// figureCardsVec1.pop_back();
+	// numericCardsVec2.pop_back();
+
+	cout << "hand1 isEmpty after pop result: " << hand2.isEmpty() << endl;
+
+
+
+
 	cout << "Exiting handTest!" << endl;
 }
