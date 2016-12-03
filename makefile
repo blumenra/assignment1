@@ -10,6 +10,7 @@ reviiyot: bin/reviiyot.o    bin/Card.o   bin/Deck.o   bin/Hand.o
 	@echo 'Invoking: C++ Linker'
 	$(CC) -o bin/reviiyot  bin/reviiyot.o  bin/Card.o  bin/Deck.o  bin/Hand.o
 	@echo 'Finished building target: reviiyot'
+	@echo '********************************** '
 	@echo ' '
 
 # Depends on the source and header files
