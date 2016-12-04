@@ -1,0 +1,27 @@
+
+constructor (string name, int position)
+destructor()
+
+virtual void goTurn(vector<Player *> players, Deck deck)
+	virtual Card& chooseCardToRequest()
+	virtual Player* choosePlayer(vector<Player*>){
+		Player* choosePlayerWithMostCards(vector<Player*>)
+		OR
+		Player* choosePlayerCyclicly(vector<Player*>)
+	}
+	
+	vector<*Cards>& givenCards= chosenPlayer.giveCardsOfType(chosenCard)
+	if not empty
+		receiveCards(givenCards)
+	else fetchFromDeck(deck, 1)
+
+virtual bool didIwin()
+-virtual void fetchFromDeck(Deck deck, int amountToFetch);
+string getName() const;
+int getPosition() const;
+Player* getChosenPlayer();
+Card* getChosenCard();
+string toString() override;
+// One "-" means it hasn't been checked yet
+
+
