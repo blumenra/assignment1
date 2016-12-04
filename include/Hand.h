@@ -35,6 +35,13 @@ public:
 	vector<int> findCardsByValue(FigureCard& card);
 	vector<int> findCardsByValue(NumericCard& card);
 	int findPlaceByShape(Card& card, int vec, int begin, int end);
+	bool isPlaceInsideVector(int vec, int index);
+	vector<int> findCardPlace(Card& card);
+	void deleteCards(vector<Card*>& subHand, int begin, int end);
+	void insertCard(vector<Card*>& subHand, Card &card, int vec, int place);
+	void receiveCards(vector<Card*>& cards);
+	vector<Card*> giveCardsOfValue(Card& card);
+	vector<Card*> bundleCardsToGive(vector<Card*>& subHand, int begin, int end);
 };
 
 #endif

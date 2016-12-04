@@ -10,6 +10,7 @@
 using namespace std;
 
 void printIntVector(vector<int> vec);
+void printCardVector(vector<Card*>& vec);
 void cardTest();
 void deckTest();
 void handTest();
@@ -204,6 +205,7 @@ void handTest() {
 
 	Hand hand(figureCards, numericCards);
 
+
 	//toString
 	cout << "hand toString result: " << hand.toString() << endl;
 
@@ -222,15 +224,16 @@ void handTest() {
 
 	figureCards.pop_back();
 	Card* figuredCardH = new FigureCard(shapeH, figureK);
+	Card* figuredCardK2 = new FigureCard(shapeD, figureK);
 	Card* figuredCardKS = new FigureCard(shapeS, figureK);
+	figureCards.push_back(figuredCardK2);
 	figureCards.push_back(figuredCardH);
 	figureCards.erase(figureCards.begin());
 	Hand hand3(figureCards, numericCards);
 	
-	cout << "\n" + hand3.toString() << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
 	Card* figuredCardJ = new FigureCard(shapeS, figureJ);
 	Card* figuredCardQ = new FigureCard(shapeD, figureQ);
-	Card* figuredCardK2 = new FigureCard(shapeD, figureK);
 	Card* figuredCardA = new FigureCard(shapeC, figureA);
 
 
@@ -239,6 +242,7 @@ void handTest() {
 	Card* numericCard22 = new NumericCard(shapeH, 2);
 	Card* numericCard212 = new NumericCard(shapeH, 12);
 	Card* numericCard28 = new NumericCard(shapeH, 8);
+	Card* numericCard11b = new NumericCard(shapeS, 11);
 
 	// cout << "hand findCardsByValue vector content: ";
 	// printIntVector(hand3.findCardsByValue(*figuredCardJ));
@@ -249,15 +253,106 @@ void handTest() {
 
 	cout << "hand findCardsByValue vector content: ";
 	printIntVector(hand3.findCardsByValue(*figuredCardKS));
+
+
+	//findCardsByShape
+
 	cout << "hand findCardsByShape index value: " << hand3.findPlaceByShape(*figuredCardKS, 0, 1, 2) << endl;
 
 
 	cout << "Exiting handTest!" << endl;
+
+
+	//howManyOfValue
+
+	//cout << "howManyOfValue, this many:  " << hand3.howManyOfValue(*numericCard22) << endl;
+
+
+	//isPlaceInsideVector
+
+	cout << "isPlaceInsideVector (1, 0) : " << hand3.isPlaceInsideVector(1, 0) << endl;
+	cout << "isPlaceInsideVector (1, 3) : " << hand3.isPlaceInsideVector(1, 3) << endl;
+	cout << "isPlaceInsideVector (0, 1) : " << hand3.isPlaceInsideVector(0, 1) << endl;
+	cout << "isPlaceInsideVector (0, 10) : " << hand3.isPlaceInsideVector(0, 10) << endl;
+	//cout << "isPlaceInsideVector (1, -1) : " << hand3.isPlaceInsideVector(2, 1) << endl;
+
+
+	// findCardPlace
+	cout << "findCardPlace: " << endl;
+	printIntVector(hand3.findCardPlace(*figuredCardKS));
+
+
+	//addCard
+	cout << "addCard: " << hand3.addCard(*figuredCardKS) << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "addCard: " << hand3.addCard(*figuredCardKS) << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "addCard: " << hand3.addCard(*numericCard28) << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "addCard: " << hand3.addCard(*numericCard11b) << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "addCard: " << hand3.addCard(*numericCard22) << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+
+
+	//receiveCards
+	vector<Card*> figureCardsN;
+
+	figureCardsN.push_back(figuredCard1);
+	//figureCardsN.push_back(figuredCard3);
+	figureCardsN.push_back(figuredCard4);
+
+	figureCardsN.push_back(numericCard212);
+	Card* numericCard11d = new NumericCard(shapeD, 11);
+	Card* numericCard11c = new NumericCard(shapeC, 11);
+	Card* numericCard2d = new NumericCard(shapeD, 2);
+	Card* numericCard55d = new NumericCard(shapeD, 55);
+
+	figureCardsN.push_back(numericCard11d);
+	figureCardsN.push_back(numericCard11c);
+
+	cout << "receiveCards: " << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "\n" << "received: "<< endl;
+	printCardVector(figureCardsN);
+
+	hand3.receiveCards(figureCardsN);
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;	
+
+	// cout << "\n" << "received: "<< endl;
+	// printCardVector(figureCardsN);
+
+
+	//giveCardsOfValue
+	vector<Card*> givenCards;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "Asked \" Do you have any 2s? \" " << endl;
+	givenCards = hand3.giveCardsOfValue(*numericCard2d);
+	printCardVector(givenCards);
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+
+	cout << "Asked \" Do you have any 55s? \" " << endl;
+	givenCards = hand3.giveCardsOfValue(*numericCard55d);
+	printCardVector(givenCards);
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+
+
+	//removeCard
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << "was the card found and deleted? " << hand3.removeCard(*numericCard28) << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
 }
 
 void printIntVector(vector<int> vec) {
 	for(vector<int>::iterator it = vec.begin() ; it != vec.end(); it++){
 		cout << to_string(*it) + " ";
+	}
+	cout << endl;
+}
+
+void printCardVector(vector<Card*>& vec) {
+	for(vector<Card*>::iterator it = vec.begin() ; it != vec.end(); it++){
+		cout << (*it)->toString() + " ";
 	}
 	cout << endl;
 }

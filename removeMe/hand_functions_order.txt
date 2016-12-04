@@ -1,26 +1,26 @@
 Hand:
-	void receiveCards(vector<Card*> card){
-		bool addCard(card& card){
-			vactor<int> findCardPlace(Card& card){
-				vector<int> findCardsByValue(Card& card);
-				int findPlaceByShape(Card& card, int vec, int begin, int end);
+	----void receiveCards(vector<Card*> card){
+		---bool addCard(card& card){
+			----vactor<int> findCardPlace(Card& card){
+				-----vector<int> findCardsByValue(Card& card);
+				-----int findPlaceByShape(Card& card, int vec, int begin, int end);
 			}
-			boolean isPlaceInsideVector(int vec, int index);
+			---bool isPlaceInsideVector(int vec, int index);
 		}
 	}
 
-	vector<Card*> giveCardsOfType(Card& card){
+	---vector<Card*> giveCardsOfType(Card& card){
 		---vector<int> findCardsByValue(Card& card);
 	}
 
 
-	int howManyOfValue(int num);
+	
 
-	int howManyOfValue(Figure figure);
+	----int howManyOfValue(Card card);
 
-	---boolean isHandEmpty();
+	---bool isHandEmpty();
 
-	boolean removeCard(Card& card);
+	---bool removeCard(Card& card);
 
 	---int getNumberOfCards();
 
