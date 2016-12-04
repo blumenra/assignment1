@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "Card.h"
+#include <Card.h>
 
 using namespace std;
 
@@ -42,6 +42,7 @@ public:
 	void receiveCards(vector<Card*>& cards);
 	vector<Card*> giveCardsOfValue(Card& card);
 	vector<Card*> bundleCardsToGive(vector<Card*>& subHand, int begin, int end);
+	~Hand();
 };
 
 #endif

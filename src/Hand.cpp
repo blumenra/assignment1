@@ -1,5 +1,5 @@
-#include "../include/Hand.h"
-#include "../include/Card.h"
+#include <Hand.h>
+#include <Card.h>
 
 
 Hand::Hand(vector<Card*>& figureHand, vector<Card*>& numericHand)
@@ -376,4 +376,17 @@ bool Hand::removeCard(Card &card){
 	}
 
 	return deleted;
+}
+
+Hand::~Hand(){
+	
+	//Destroy figureHand
+	for(vector<Card*>::iterator it = figureHand.begin() ; it != figureHand.end(); it++){
+		delete (*it);
+	}
+
+	//Destroy numericHand
+	for(vector<Card*>::iterator it = numericHand.begin() ; it != numericHand.end(); it++){
+		delete (*it);
+	}
 }
