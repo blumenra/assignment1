@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include <Game.h>
 
@@ -14,14 +15,23 @@ void printCardVector(vector<Card*>& vec);
 void cardTest();
 void deckTest();
 void handTest();
+void playerTest();
+
+// These are for Game**************************************************************************
+vector<Card*> cardsForDeckCreator(string parsedDeck);
+Shape stringToShape(string strShape);
+Figure stringToFigure(string strFigure);
+bool isFigure(string value);
+// These are for Game**************************************************************************
 
 int main(int argc, char **argv) {
 
 
 
 	// cardTest();
-	// deckTest();
-	handTest();
+	//deckTest();
+	//handTest();
+	playerTest();
 
 	cout << "Exiting main" << endl;
 
@@ -109,8 +119,8 @@ void deckTest() {
 	vector<Card*> cards;
 	cout << "Is this cards empty?: " << cards.empty() << endl;
 
-	cards.push_back(figuredCard);
-	cards.push_back(numericCard);
+	cards.push_back(new FigureCard(shape, figure));
+	cards.push_back(new NumericCard(shape, 1234));
 
 	// cards.pop_back();
 
@@ -356,3 +366,105 @@ void printCardVector(vector<Card*>& vec) {
 	}
 	cout << endl;
 }
+
+void playerTest() {
+	string parsedDeck("12C QH JS 13D KC 3H 3D 9D 14C KS AD JD 8D 4D 7C 2S 11H 10D 15S 11D QD 2C 6D 15D 13S 5S 8C 13C 3S 2D 12H JC 4H 3C 15C 15H 11S 7D 10C QS 11C 6C 8H 5H 9C 4C 5C KH 13H 14S QC 12D 10H 14H 6S 5D 10S KD 7H AH 7S 9S JH 2H 4S 9H AS 6H AC 8S 12S 14D");
+	
+	vector<Card*> cards = cardsForDeckCreator(parsedDeck);
+	Deck deck(cards);
+	cout << "deck: " << deck.toString() << endl;
+
+}
+
+
+// These are for Game**************************************************************************
+vector<Card*> cardsForDeckCreator(string parsedDeck) {
+
+	stringstream parsedDeckss(parsedDeck);
+
+	vector<Card*> cards;
+	
+	vector<string> strCards;
+	while(parsedDeckss.good()){
+		string substr;
+		getline(parsedDeckss, substr, ' ');
+		strCards.push_back( substr );
+	}
+
+	strCards.push_back("12C");
+	strCards.push_back("QH");
+	
+
+	for(vector<string>::iterator it = strCards.begin() ; it != strCards.end(); it++){
+		cout << "input string: " << *it << endl;
+		int itLength = (*it).length();
+		string strValue = (*it).substr(0, itLength -1);
+		string strShape = (*it).substr(itLength -1, 1);
+		if(isFigure(strValue)){
+			cards.push_back(new FigureCard(stringToShape(strShape), stringToFigure(strValue)));
+		}
+		else{
+			cards.push_back(new NumericCard(stringToShape(strShape), stoi(strValue)));
+		}
+	}
+
+	return cards;
+}
+
+Shape stringToShape(string strShape) {
+	
+	Shape shapeC(Club);
+	Shape shapeD (Diamond);
+	Shape shapeH(Heart);
+	Shape shapeS(Spade);
+
+	if(strShape == "C"){
+		return shapeC;
+	}
+	else if(strShape == "D"){
+		return shapeD;
+	}
+	else if(strShape == "H"){
+		return shapeH;
+	}
+	else if(strShape == "S"){
+		return shapeS;
+	}
+	else{
+		throw invalid_argument("The card's shape is invalid!!!");
+	}
+}
+
+Figure stringToFigure(string strFigure) {
+	
+	Figure figureJ(Jack);
+	Figure figureQ(Queen);
+	Figure figureK(King);
+	Figure figureA(Ace);
+
+	if(strFigure == "J"){
+		return figureJ;
+	}
+	else if(strFigure == "Q"){
+		return figureQ;
+	}
+	else if(strFigure == "K"){
+		return figureK;
+	}
+	else if(strFigure == "A"){
+		return figureA;
+	}
+	else{
+		throw invalid_argument("The card's figure is invalid!!!");
+	}
+}
+
+bool isFigure(string value){
+	bool figure = false;
+	if(value == "J" || value == "Q" || value == "K" || value == "A"){
+		figure = true;
+	}
+
+	return figure;
+}
+// These are for Game**************************************************************************
