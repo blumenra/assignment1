@@ -467,4 +467,17 @@ bool isFigure(string value){
 
 	return figure;
 }
+
+/*
+#include <fstream>
+
+ifstream theFile;
+theFile.open("/freespace/msc/brukes/Courses/SPL/assignment1/removeMe/configurationFiles/config1.txt");
+string line;
+
+while(getline(theFile, line)){
+
+}
+*/
+
 // These are for Game**************************************************************************
