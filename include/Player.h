@@ -2,7 +2,7 @@
 #define PLAYER_H_
 
 #include <iostream>
-
+#include <Deck.h>
 #include <Hand.h>
 
 using namespace std;
@@ -10,8 +10,14 @@ using namespace std;
 class Player : public Hand {
 private:
 	const string name;
+	const int position;
+	Player& chosenPlayer;
+	Card& chosenCard;
+
 public:
+	Player(string name, int position);
 	string getName();   //Returns the name of the player
+	virtual void fetchFromDeck(Deck deck, int amountToFetch);
 };
 
 class PlayerType1 : public Player {  //For strategy 1
