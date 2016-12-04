@@ -1,5 +1,5 @@
-#include "../include/Card.h"
-#include "../include/Hand.h"
+#include <Card.h>
+#include <Hand.h>
 
 // Card constructor
 Card::Card(Shape shape): shape(shape) {}

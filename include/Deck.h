@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "Card.h"
+#include <Card.h>
 
 using namespace std;
 

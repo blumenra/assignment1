@@ -1,11 +1,11 @@
 #include <iostream>
 
-// #include <Game.h>
+#include <Game.h>
 
 
-#include "../include/Card.h"
-#include "../include/Deck.h"
-#include "../include/Hand.h"
+#include <Card.h>
+#include <Deck.h>
+#include <Hand.h>
 
 using namespace std;
 

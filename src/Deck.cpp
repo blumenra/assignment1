@@ -1,4 +1,4 @@
-#include "../include/Deck.h"
+#include <Deck.h>
 
 //Deck Constructor
 Deck::Deck(vector<Card*>& deck): deck(deck) {}
