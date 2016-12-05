@@ -214,6 +214,11 @@ void handTest() {
 	cout << "creating a hand with the above cards.." << endl;
 
 	Hand hand(figureCards, numericCards);
+	// Hand hand();
+	// hand.receiveCards(figureCards);
+	// hand.receiveCards(numericCards);
+
+
 
 
 	//toString
