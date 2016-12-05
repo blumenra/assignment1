@@ -21,6 +21,7 @@ public:
 	virtual void fetchFromDeck(Deck& deck, int amountToFetch);
 	virtual ~Player();
 	string toString();
+	bool didIwin();
 };
 
 class PlayerType1 : public Player {  //For strategy 1

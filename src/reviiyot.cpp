@@ -405,10 +405,10 @@ void playerTest() {
 	cout << endl;
 
 	//fetchFromDeck
-	player1->fetchFromDeck(*deck, 7);
-	player2->fetchFromDeck(*deck, 7);
-	player3->fetchFromDeck(*deck, 7);
-	player4->fetchFromDeck(*deck, 7);
+	player1->fetchFromDeck(*deck, 0);
+	player2->fetchFromDeck(*deck, 1);
+	player3->fetchFromDeck(*deck, 1);
+	player4->fetchFromDeck(*deck, 200);
 
 	cout << "Deck after fetches: " << "\n" << deck->toString() + "\n" << endl;
 	cout << endl;
@@ -418,6 +418,12 @@ void playerTest() {
 	cout << player3->toString() << endl;
 	cout << player4->toString() << endl;
 	cout << endl;
+
+	//didIwin
+	cout << "player1 didIwin?: " << player1->didIwin() << endl;
+	cout << "player2 didIwin?: " << player2->didIwin() << endl;
+	cout << "player3 didIwin?: " << player3->didIwin() << endl;
+	cout << "player4 didIwin?: " << player4->didIwin() << endl;
 
 }
 

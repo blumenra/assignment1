@@ -30,3 +30,7 @@ string Player::toString() {
 
 	return s;
 }
+
+bool Player::didIwin() {
+	return this->isEmpty();
+}

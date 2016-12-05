@@ -15,13 +15,13 @@ virtual void goTurn(vector<Player *> players, Deck deck);
 		receiveCards(givenCards);
 	else fetchFromDeck(deck, 1);
 
-virtual bool didIwin();
+// virtual bool didIwin();
 // virtual void fetchFromDeck(Deck deck, int amountToFetch);
 // string getName() const;
 // int getPosition() const;
 Player* getChosenPlayer();
 Card* getChosenCard();
-string toString() override;
+// string toString() override;
 // One "-" means it hasn't been checked yet
 
 
