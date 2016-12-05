@@ -18,3 +18,15 @@ void Player::fetchFromDeck(Deck& deck, int amountToFetch){
 	receiveCards(given);
 }
 
+Player::~Player() {
+	delete this->chosenPlayer;
+	delete this->chosenCard;
+}
+
+string Player::toString() {
+	
+	string s = name + ": ";
+	s += this->Hand::toString();
+
+	return s;
+}

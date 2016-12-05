@@ -413,10 +413,10 @@ void playerTest() {
 	cout << "Deck after fetches: " << "\n" << deck->toString() + "\n" << endl;
 	cout << endl;
 
-	cout << "Player1's hand: " << player1->toString() << endl;
-	cout << "Player2's hand: " << player2->toString() << endl;
-	cout << "Player3's hand: " << player3->toString() << endl;
-	cout << "Player4's hand: " << player4->toString() << endl;
+	cout << player1->toString() << endl;
+	cout << player2->toString() << endl;
+	cout << player3->toString() << endl;
+	cout << player4->toString() << endl;
 	cout << endl;
 
 }
