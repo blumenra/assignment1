@@ -14,10 +14,7 @@ int Player::getPosition() const {
 
 void Player::fetchFromDeck(Deck& deck, int amountToFetch){
 	
-	cout << "Deck before: " << deck.toString() + "\n" << endl;
 	vector<Card*> given = deck.giveCards(amountToFetch);
 	receiveCards(given);
-	cout << "Deck after: " << deck.toString() + "\n" << endl;
-
 }
 

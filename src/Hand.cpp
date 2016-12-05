@@ -355,8 +355,6 @@ bool Hand::removeCard(Card &card){
 
 	if (isPlaceInsideVector(place[0], place[3])){
 		if(place[0] == 0){
-			cout << "card value: " << card.getStrValue() << endl;
-			cout << "other card value: " << figureHand[place[3]]->getStrValue() << endl;
 			if(compareFigures(card.getStrValue(), figureHand[place[3]]->getStrValue()) == 0){
 				if(compareShapes(card.getShape(), figureHand[place[3]]->getShape()) == 0){
 					deleteCards(figureHand, place[3], place[3]);

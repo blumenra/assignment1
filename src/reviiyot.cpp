@@ -378,14 +378,14 @@ void playerTest() {
 	
 	vector<Card*> cards = cardsForDeckCreator(parsedDeck);
 	Deck* deck = new Deck(cards);
-	cout << "deck: " << deck->toString() << endl;
-
+	cout << "initial deck: " << "\n" << deck->toString() << endl;
+	cout << endl;
 
 	// players creations
 	Player* player1 = new Player("Alon", 0);
 	Player* player2 = new Player("Ofer", 1);
-	// Player player3("Rick", 2);
-	// Player player4("Morty", 3);
+	Player* player3 = new Player("Rick", 2);
+	Player* player4 = new Player("Morty", 3);
 
 
 
@@ -393,32 +393,31 @@ void playerTest() {
 	// getName
 	cout << "Player1's name: " << player1->getName() << endl;
 	cout << "Player2's name: " << player2->getName() << endl;
-
+	cout << "Player3's name: " << player3->getName() << endl;
+	cout << "Player4's name: " << player4->getName() << endl;
+	cout << endl;
 
 	//getPosition
 	cout << "Player1's position: " << player1->getPosition() << endl;
 	cout << "Player2's position: " << player2->getPosition() << endl;
+	cout << "Player3's position: " << player3->getPosition() << endl;
+	cout << "Player4's position: " << player4->getPosition() << endl;
+	cout << endl;
 
 	//fetchFromDeck
-	cout << "Player1 going to fetchFromDeck" << endl;
-	
+	player1->fetchFromDeck(*deck, 7);
+	player2->fetchFromDeck(*deck, 7);
+	player3->fetchFromDeck(*deck, 7);
+	player4->fetchFromDeck(*deck, 7);
 
-	player1->fetchFromDeck(*deck, 71);
-	cout << "Player2 going to fetchFromDeck" << endl;
-	cout << "is Deck empty " << deck->isEmpty() << endl;
+	cout << "Deck after fetches: " << "\n" << deck->toString() + "\n" << endl;
+	cout << endl;
 
-	player2->fetchFromDeck(*deck, 1);
-	cout << "Player2 back from fetchFromDeck" << endl;
-	// player3.fetchFromDeck(deck, 7);
-	// player4.fetchFromDeck(deck, 7);
-	cout << "going to toString deck" << endl;
-	cout << "Deck: " << deck->toString() + "\n" << endl;
-	cout << "finished toStringing deck" << endl;
-	
 	cout << "Player1's hand: " << player1->toString() << endl;
-	// cout << "Player2's hand: " << player2.toString() << endl;
-	// cout << "Player3's hand: " << player3.toString() << endl;
-	// cout << "Player4's hand: " << player4.toString() << endl;
+	cout << "Player2's hand: " << player2->toString() << endl;
+	cout << "Player3's hand: " << player3->toString() << endl;
+	cout << "Player4's hand: " << player4->toString() << endl;
+	cout << endl;
 
 }
 
