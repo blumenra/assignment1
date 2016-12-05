@@ -11,12 +11,13 @@ class Player : public Hand {
 private:
 	const string name;
 	const int position;
-	Player& chosenPlayer;
-	Card& chosenCard;
+	Player* chosenPlayer;
+	Card* chosenCard;
 
 public:
 	Player(string name, int position);
-	string getName();   //Returns the name of the player
+	string getName() const;   //Returns the name of the player
+	int getPosition() const;
 	virtual void fetchFromDeck(Deck deck, int amountToFetch);
 };
 
