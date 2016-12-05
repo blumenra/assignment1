@@ -4,9 +4,10 @@
 #include <Game.h>
 
 
-#include <Card.h>
-#include <Deck.h>
+// #include <Card.h>
+// #include <Deck.h>
 #include <Hand.h>
+// #include <Player.h>
 
 using namespace std;
 
@@ -100,7 +101,6 @@ void cardTest() {
 
 
 	cout << "Exiting cardTest!" << endl;
-
 }
 
 void deckTest() {
@@ -170,7 +170,6 @@ void deckTest() {
 
 
 	cout << "Exiting deckTest!" << endl;
-
 }
 
 void handTest() {
@@ -382,49 +381,54 @@ void playerTest() {
 	cout << endl;
 
 	// players creations
-	Player* player1 = new Player("Alon", 0);
-	Player* player2 = new Player("Ofer", 1);
-	Player* player3 = new Player("Rick", 2);
-	Player* player4 = new Player("Morty", 3);
+	Player* playerType1 = new PlayerType1("Alon", 0);
+	Player* playerType2 = new PlayerType1("Ofer", 1);
+	Player* playerType3 = new PlayerType1("Rick", 2);
+	Player* playerType4 = new PlayerType1("Morty", 3);
 
 
 
 
 	// getName
-	cout << "Player1's name: " << player1->getName() << endl;
-	cout << "Player2's name: " << player2->getName() << endl;
-	cout << "Player3's name: " << player3->getName() << endl;
-	cout << "Player4's name: " << player4->getName() << endl;
+	cout << "playerType1's name: " << playerType1->getName() << endl;
+	cout << "playerType2's name: " << playerType2->getName() << endl;
+	cout << "playerType3's name: " << playerType3->getName() << endl;
+	cout << "playerType4's name: " << playerType4->getName() << endl;
 	cout << endl;
 
 	//getPosition
-	cout << "Player1's position: " << player1->getPosition() << endl;
-	cout << "Player2's position: " << player2->getPosition() << endl;
-	cout << "Player3's position: " << player3->getPosition() << endl;
-	cout << "Player4's position: " << player4->getPosition() << endl;
+	cout << "playerType1's position: " << playerType1->getPosition() << endl;
+	cout << "playerType2's position: " << playerType2->getPosition() << endl;
+	cout << "playerType3's position: " << playerType3->getPosition() << endl;
+	cout << "playerType4's position: " << playerType4->getPosition() << endl;
 	cout << endl;
 
 	//fetchFromDeck
-	player1->fetchFromDeck(*deck, 0);
-	player2->fetchFromDeck(*deck, 1);
-	player3->fetchFromDeck(*deck, 1);
-	player4->fetchFromDeck(*deck, 200);
+	playerType1->fetchFromDeck(*deck, 1);
+	playerType2->fetchFromDeck(*deck, 1);
+	playerType3->fetchFromDeck(*deck, 1);
+	playerType4->fetchFromDeck(*deck, 80);
 
 	cout << "Deck after fetches: " << "\n" << deck->toString() + "\n" << endl;
 	cout << endl;
 
-	cout << player1->toString() << endl;
-	cout << player2->toString() << endl;
-	cout << player3->toString() << endl;
-	cout << player4->toString() << endl;
+	cout << playerType1->toString() << endl;
+	cout << playerType2->toString() << endl;
+	cout << playerType3->toString() << endl;
+	cout << playerType4->toString() << endl;
 	cout << endl;
 
 	//didIwin
-	cout << "player1 didIwin?: " << player1->didIwin() << endl;
-	cout << "player2 didIwin?: " << player2->didIwin() << endl;
-	cout << "player3 didIwin?: " << player3->didIwin() << endl;
-	cout << "player4 didIwin?: " << player4->didIwin() << endl;
+	cout << "playerType1 didIwin?: " << playerType1->didIwin() << endl;
+	cout << "playerType2 didIwin?: " << playerType2->didIwin() << endl;
+	cout << "playerType3 didIwin?: " << playerType3->didIwin() << endl;
+	cout << "playerType4 didIwin?: " << playerType4->didIwin() << endl;
 
+	//chooseCardToRequest
+	cout << "chosen card of player1: " << playerType1->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of player2: " << playerType2->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of player3: " << playerType3->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of player4: " << playerType4->chooseCardToRequest()->toString() << endl;
 }
 
 

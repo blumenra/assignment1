@@ -22,10 +22,14 @@ public:
 	virtual ~Player();
 	string toString();
 	bool didIwin();
+	virtual Card* chooseCardToRequest() = 0;
+	// virtual Player* choosePlayer(vector<Player*>) = 0;
 };
 
 class PlayerType1 : public Player {  //For strategy 1
-//...
+public:
+	PlayerType1(string name, int position);
+	Card* chooseCardToRequest();
 };
 
 class PlayerType2 : public Player {  //For strategy 2

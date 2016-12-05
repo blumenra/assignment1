@@ -32,5 +32,92 @@ string Player::toString() {
 }
 
 bool Player::didIwin() {
+
 	return this->isEmpty();
+}
+
+
+
+/****PlayerType1****/
+
+PlayerType1::PlayerType1(string name, int position)
+: Player(name, position)
+{}
+
+Card* PlayerType1::chooseCardToRequest() {
+	
+	if(this->didIwin()){
+		throw invalid_argument("Cannot choose card from empty hand!!!");
+	}
+
+	Card* chosenCard;
+	Card* tempCard;
+	vector<Card*> figureHand = getFigureHand();
+	vector<Card*> numericHand = getNumericHand();
+
+
+	int counter = 1;
+	int maxFound = 1;
+
+	if(!figureHand.empty()) {
+
+		tempCard = figureHand.back();
+		chosenCard = figureHand.back();
+		
+		for(vector<Card*>::reverse_iterator rit = figureHand.rbegin()+1 ; rit != figureHand.rend(); rit++){
+			// cout << "tempCard: " << tempCard->toString() << endl;
+			// cout << "rit: " << (*rit)->toString() << endl;
+			// cout << "chosenCard: " << chosenCard->toString() << endl;
+			// cout << endl;
+			if(compareFigures(tempCard->getStrValue(), (*rit)->getStrValue()) == 0) {
+				counter++;
+			}
+			else if(compareFigures(tempCard->getStrValue(), (*rit)->getStrValue()) > 0) {
+				// cout << "inside elseif- tempCard: " << tempCard->toString() << endl;
+				// cout << "inside elseif- chosenCard: " << chosenCard->toString() << endl;
+				tempCard = (*rit);
+				counter = 1;
+			}
+			else {
+				throw invalid_argument("FigureHand is out of order!!!");
+			}
+
+			if(counter > maxFound) {
+				chosenCard = tempCard;
+				maxFound = counter;
+			}
+		}
+	}
+	else {
+		if(!numericHand.empty()) {
+			chosenCard = numericHand.back();
+		}
+	}
+
+	counter = 1;
+
+	if(!numericHand.empty()) {
+		
+		tempCard = numericHand.back();
+		
+		for(vector<Card*>::reverse_iterator rit = numericHand.rbegin()+1 ; rit != numericHand.rend(); rit++){
+			if(compareNumbers(tempCard->getStrValue(), (*rit)->getStrValue()) == 0) {
+				counter++;
+			}
+			else if(compareNumbers(tempCard->getStrValue(), (*rit)->getStrValue()) > 0) {
+				tempCard = (*rit);
+				counter = 1;
+			}
+			else {
+				throw invalid_argument("numericHand is out of order!!!");
+			}
+
+			if(counter > maxFound) {
+				chosenCard = tempCard;
+				maxFound = counter;
+			}
+		}
+	}
+
+	return chosenCard;
 }

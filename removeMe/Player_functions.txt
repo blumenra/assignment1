@@ -2,8 +2,8 @@
 // constructor (string name, int position)
 -destructor();
 
-virtual void goTurn(vector<Player *> players, Deck deck);
-	virtual Card& chooseCardToRequest();
+virtual void goTurn(vector<Player *> players, Deck deck){
+	// virtual Card& chooseCardToRequest();
 	virtual Player* choosePlayer(vector<Player*>){
 		Player* choosePlayerWithMostCards(vector<Player*>);
 		OR
@@ -14,7 +14,7 @@ virtual void goTurn(vector<Player *> players, Deck deck);
 	if not empty
 		receiveCards(givenCards);
 	else fetchFromDeck(deck, 1);
-
+}
 // virtual bool didIwin();
 // virtual void fetchFromDeck(Deck deck, int amountToFetch);
 // string getName() const;
