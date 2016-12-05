@@ -30,8 +30,8 @@ int main(int argc, char **argv) {
 
 	// cardTest();
 	//deckTest();
-	handTest();
-	// playerTest();
+	// handTest();
+	playerTest();
 
 	cout << "Exiting main" << endl;
 
@@ -377,6 +377,39 @@ void playerTest() {
 	Deck deck(cards);
 	cout << "deck: " << deck.toString() << endl;
 
+
+	// players creations
+	Player player1("Alon", 0);
+	Player player2("Ofer", 1);
+	Player player3("Rick", 2);
+	Player player4("Morty", 3);
+
+
+
+
+	// getName
+	cout << "Player1's name: " << player1.getName() << endl;
+	cout << "Player2's name: " << player2.getName() << endl;
+
+
+	//getPosition
+	cout << "Player1's position: " << player1.getPosition() << endl;
+	cout << "Player2's position: " << player2.getPosition() << endl;
+
+	//fetchFromDeck
+	player1.fetchFromDeck(deck, 1);
+	// player2.fetchFromDeck(deck, 7);
+	// player3.fetchFromDeck(deck, 7);
+	// player4.fetchFromDeck(deck, 7);
+	cout << "going to toString deck" << endl;
+	cout << "Deck: " << deck.toString() + "\n" << endl;
+	cout << "finished toStringing deck" << endl;
+	
+	cout << "Player1's hand: " << player1.toString() << endl;
+	// cout << "Player2's hand: " << player2.toString() << endl;
+	// cout << "Player3's hand: " << player3.toString() << endl;
+	// cout << "Player4's hand: " << player4.toString() << endl;
+
 }
 
 
@@ -399,7 +432,7 @@ vector<Card*> cardsForDeckCreator(string parsedDeck) {
 	
 
 	for(vector<string>::iterator it = strCards.begin() ; it != strCards.end(); it++){
-		cout << "input string: " << *it << endl;
+		// cout << "input string: " << *it << endl;
 		int itLength = (*it).length();
 		string strValue = (*it).substr(0, itLength -1);
 		string strShape = (*it).substr(itLength -1, 1);

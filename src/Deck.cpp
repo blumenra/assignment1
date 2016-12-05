@@ -14,11 +14,13 @@ int Deck::getNumberOfCards(){
 string Deck::toString(){
 	string strDeck = "";
 	for(vector<Card*>::iterator it = deck.begin() ; it != deck.end(); it++){
+		cout << (*it)->toString() << endl;
 		strDeck += (*it)->toString() + " ";
 	}
 	int strDeckLength = strDeck.length();
-	string strDeckNoLastSpace = strDeck.substr(0, strDeckLength-1);
-	return strDeckNoLastSpace;
+	// string strDeckNoLastSpace = strDeck.substr(0, strDeckLength-1);
+	// return strDeckNoLastSpace;
+	return strDeck;
 }
 
 Deck::~Deck(){
