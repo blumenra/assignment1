@@ -1,14 +1,7 @@
 #include <Hand.h>
 #include <Card.h>
 
-Hand::Hand() {
-	
-	vector<Card*> _figureHand;
-	this->figureHand = _figureHand;
-
-	vector<Card*> _numericHand;
-	this->numericHand = _numericHand;
-}
+Hand::Hand() {}
 
 // CONSTRACTOR FOR DEBUGGING ONLY (can be removed later..)
 Hand::Hand(vector<Card*>& figureHand, vector<Card*>& numericHand)
