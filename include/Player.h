@@ -18,7 +18,7 @@ public:
 	Player(string name, int position);
 	string getName() const;   //Returns the name of the player
 	int getPosition() const;
-	virtual void fetchFromDeck(Deck deck, int amountToFetch);
+	virtual void fetchFromDeck(Deck& deck, int amountToFetch);
 };
 
 class PlayerType1 : public Player {  //For strategy 1

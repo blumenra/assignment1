@@ -202,6 +202,9 @@ void handTest() {
 	vector<Card*> figureCards;
 	vector<Card*> numericCards;
 
+	vector<Card*> figureCards1;
+	vector<Card*> numericCards1;
+
 	figureCards.push_back(figuredCard1);
 	figureCards.push_back(figuredCard2);
 	figureCards.push_back(figuredCard3);
@@ -214,8 +217,8 @@ void handTest() {
 	cout << "creating a hand with the above cards.." << endl;
 
 	Hand hand;
-	hand.receiveCards(figureCards);
-	hand.receiveCards(numericCards);
+	hand.receiveCards(figureCards1);
+	hand.receiveCards(numericCards1);
 
 
 
@@ -374,38 +377,45 @@ void playerTest() {
 	string parsedDeck("12C QH JS 13D KC 3H 3D 9D 14C KS AD JD 8D 4D 7C 2S 11H 10D 15S 11D QD 2C 6D 15D 13S 5S 8C 13C 3S 2D 12H JC 4H 3C 15C 15H 11S 7D 10C QS 11C 6C 8H 5H 9C 4C 5C KH 13H 14S QC 12D 10H 14H 6S 5D 10S KD 7H AH 7S 9S JH 2H 4S 9H AS 6H AC 8S 12S 14D");
 	
 	vector<Card*> cards = cardsForDeckCreator(parsedDeck);
-	Deck deck(cards);
-	cout << "deck: " << deck.toString() << endl;
+	Deck* deck = new Deck(cards);
+	cout << "deck: " << deck->toString() << endl;
 
 
 	// players creations
-	Player player1("Alon", 0);
-	Player player2("Ofer", 1);
-	Player player3("Rick", 2);
-	Player player4("Morty", 3);
+	Player* player1 = new Player("Alon", 0);
+	Player* player2 = new Player("Ofer", 1);
+	// Player player3("Rick", 2);
+	// Player player4("Morty", 3);
 
 
 
 
 	// getName
-	cout << "Player1's name: " << player1.getName() << endl;
-	cout << "Player2's name: " << player2.getName() << endl;
+	cout << "Player1's name: " << player1->getName() << endl;
+	cout << "Player2's name: " << player2->getName() << endl;
 
 
 	//getPosition
-	cout << "Player1's position: " << player1.getPosition() << endl;
-	cout << "Player2's position: " << player2.getPosition() << endl;
+	cout << "Player1's position: " << player1->getPosition() << endl;
+	cout << "Player2's position: " << player2->getPosition() << endl;
 
 	//fetchFromDeck
-	player1.fetchFromDeck(deck, 1);
-	// player2.fetchFromDeck(deck, 7);
+	cout << "Player1 going to fetchFromDeck" << endl;
+	
+
+	player1->fetchFromDeck(*deck, 71);
+	cout << "Player2 going to fetchFromDeck" << endl;
+	cout << "is Deck empty " << deck->isEmpty() << endl;
+
+	player2->fetchFromDeck(*deck, 1);
+	cout << "Player2 back from fetchFromDeck" << endl;
 	// player3.fetchFromDeck(deck, 7);
 	// player4.fetchFromDeck(deck, 7);
 	cout << "going to toString deck" << endl;
-	cout << "Deck: " << deck.toString() + "\n" << endl;
+	cout << "Deck: " << deck->toString() + "\n" << endl;
 	cout << "finished toStringing deck" << endl;
 	
-	cout << "Player1's hand: " << player1.toString() << endl;
+	cout << "Player1's hand: " << player1->toString() << endl;
 	// cout << "Player2's hand: " << player2.toString() << endl;
 	// cout << "Player3's hand: " << player3.toString() << endl;
 	// cout << "Player4's hand: " << player4.toString() << endl;
@@ -426,10 +436,6 @@ vector<Card*> cardsForDeckCreator(string parsedDeck) {
 		getline(parsedDeckss, substr, ' ');
 		strCards.push_back( substr );
 	}
-
-	strCards.push_back("12C");
-	strCards.push_back("QH");
-	
 
 	for(vector<string>::iterator it = strCards.begin() ; it != strCards.end(); it++){
 		// cout << "input string: " << *it << endl;
