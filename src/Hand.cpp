@@ -390,3 +390,11 @@ Hand::~Hand(){
 		delete (*it);
 	}
 }
+
+vector<Card*> Hand::getFigureHand() {
+	return this->figureHand;
+}
+
+vector<Card*> Hand::getNumericHand() {
+	return this->numericHand;	
+}
