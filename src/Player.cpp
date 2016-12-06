@@ -74,16 +74,6 @@ Card* PlayerType1::chooseCardToRequest() {
 	int counter = 1;
 	int maxFound = 1;
 
-	// cout << endl;
-	// cout << "player:" << toString() << endl;
-	// cout << "couner: " << counter << endl;
-	// cout << "minFound: " << minFound << endl;
-	// cout << "it: " << (*it)->toString() << endl;
-	// cout << "tempCard: " << tempCard->toString() << endl;
-	// cout << "chosenCard: " << chosenCard->toString() << endl;
-	// cout << endl;
-
-
 	if(!figureHand.empty()) {
 
 		tempCard = figureHand.back();

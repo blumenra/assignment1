@@ -374,7 +374,7 @@ void printCardVector(vector<Card*>& vec) {
 
 void playerTest() {
 	string parsedDeck("12C QH JS 13D KC 3H 3D 9D 14C KS AD JD 8D 4D 7C 2S 11H 10D 15S 11D QD 2C 6D 15D 13S 5S 8C 13C 3S 2D 12H JC 4H 3C 15C 15H 11S 7D 10C QS 11C 6C 8H 5H 9C 4C 5C KH 13H 14S QC 12D 10H 14H 6S 5D 10S KD 7H AH 7S 9S JH 2H 4S 9H AS 6H AC 8S 12S 14D");
-	string testDeck("2C 2D 2H 3C 3D 3S 5H JC JD JS QC QH QS KC KS");
+	string testDeck("2C 2D 2H 3C 3D 5H JC QH KS");
 
 	vector<Card*> cards = cardsForDeckCreator(testDeck);
 	Deck* deck = new Deck(cards);
@@ -382,10 +382,10 @@ void playerTest() {
 	cout << endl;
 
 	// players creations
-	Player* playerType1 = new PlayerType2("Alon", 0);
-	Player* playerType2 = new PlayerType2("Ofer", 1);
-	Player* playerType3 = new PlayerType2("Rick", 2);
-	Player* playerType4 = new PlayerType2("Morty", 3);
+	Player* playerType1 = new PlayerType1("Alon", 0);
+	Player* playerType2 = new PlayerType1("Ofer", 1);
+	Player* playerType3 = new PlayerType1("Rick", 2);
+	Player* playerType4 = new PlayerType1("Morty", 3);
 
 
 	vector<Player*> players;
@@ -411,10 +411,10 @@ void playerTest() {
 	cout << endl;
 
 	//fetchFromDeck
-	playerType1->fetchFromDeck(*deck, 5);
-	playerType2->fetchFromDeck(*deck, 1);
-	playerType3->fetchFromDeck(*deck, 1);
-	playerType4->fetchFromDeck(*deck, 8);
+	playerType1->fetchFromDeck(*deck, 2);
+	playerType2->fetchFromDeck(*deck, 2);
+	playerType3->fetchFromDeck(*deck, 2);
+	playerType4->fetchFromDeck(*deck, 4);
 
 	cout << "Deck after fetches: " << "\n" << deck->toString() + "\n" << endl;
 	cout << endl;
@@ -430,18 +430,22 @@ void playerTest() {
 	cout << "playerType2 didIwin?: " << playerType2->didIwin() << endl;
 	cout << "playerType3 didIwin?: " << playerType3->didIwin() << endl;
 	cout << "playerType4 didIwin?: " << playerType4->didIwin() << endl;
+	cout << endl;
 
 	// //chooseCardToRequest
-	cout << "chosen card of player1: " << playerType1->chooseCardToRequest()->toString() << endl;
-	cout << "chosen card of player2: " << playerType2->chooseCardToRequest()->toString() << endl;
-	cout << "chosen card of player3: " << playerType3->chooseCardToRequest()->toString() << endl;
-	cout << "chosen card of player4: " << playerType4->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of " << playerType1->toString() << ":\n"  << playerType1->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of " << playerType2->toString() << ":\n"  << playerType2->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of " << playerType3->toString() << ":\n"  << playerType3->chooseCardToRequest()->toString() << endl;
+	cout << "chosen card of " << playerType4->toString() << ":\n"  << playerType4->chooseCardToRequest()->toString() << endl;
+	cout << endl;
 
 	//choosePlayer
-	cout << "chosen player of player1: " << playerType1->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of player2: " << playerType2->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of player3: " << playerType3->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of player4: " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
+
 }
 
 
