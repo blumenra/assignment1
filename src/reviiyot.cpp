@@ -382,10 +382,10 @@ void playerTest() {
 	cout << endl;
 
 	// players creations
-	Player* playerType1 = new PlayerType3("Alon", 0);
-	Player* playerType2 = new PlayerType3("Ofer", 1);
+	Player* playerType1 = new PlayerType1("Alon", 0);
+	Player* playerType2 = new PlayerType2("Ofer", 1);
 	Player* playerType3 = new PlayerType3("Rick", 2);
-	Player* playerType4 = new PlayerType3("Morty", 3);
+	Player* playerType4 = new PlayerType4("Morty", 3);
 
 
 	vector<Player*> players;
@@ -458,24 +458,47 @@ void playerTest() {
 	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
 	cout << endl;
 
-	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	//goTurn!!!
+	cout << "Turn 1" << endl;
+	cout << "Deck: " << deck->toString() << endl;
+	cout << playerType1->toString() << endl;
+	cout << playerType2->toString() << endl;
+	cout << playerType3->toString() << endl;
+	cout << playerType4->toString() << endl;
+	playerType1->goTurn(players, *deck);
+	cout << playerType1->getName()  << " asked " << playerType1->getChosenPlayer()->getName()  << " for the value " << playerType1->getChosenCard()->getStrValue() << endl;
 	cout << endl;
 
-	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << "Turn 2" << endl;
+	cout << "Deck: " << deck->toString() << endl;
+	cout << playerType1->toString() << endl;
+	cout << playerType2->toString() << endl;
+	cout << playerType3->toString() << endl;
+	cout << playerType4->toString() << endl;
+	playerType2->goTurn(players, *deck);
+	cout << playerType2->getName()  << " asked " << playerType2->getChosenPlayer()->getName()  << " for the value " << playerType2->getChosenCard()->getStrValue() << endl;
 	cout << endl;
 
-	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
-	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << "Turn 3" << endl;
+	cout << "Deck: " << deck->toString() << endl;
+	cout << playerType1->toString() << endl;
+	cout << playerType2->toString() << endl;
+	cout << playerType3->toString() << endl;
+	cout << playerType4->toString() << endl;
+	playerType3->goTurn(players, *deck);
+	cout << playerType3->getName()  << " asked " << playerType3->getChosenPlayer()->getName()  << " for the value " << playerType3->getChosenCard()->getStrValue() << endl;
 	cout << endl;
 
+	cout << "Turn 4" << endl;
+	cout << "Deck: " << deck->toString() << endl;
+	cout << playerType1->toString() << endl;
+	cout << playerType2->toString() << endl;
+	cout << playerType3->toString() << endl;
+	cout << playerType4->toString() << endl;
+	playerType4->goTurn(players, *deck);
+	cout << playerType4->getName()  << " asked " << playerType4->getChosenPlayer()->getName()  << " for the value " << playerType4->getChosenCard()->getStrValue() << endl;
+	cout << endl;
+	
 }
 
 

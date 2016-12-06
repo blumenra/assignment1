@@ -12,7 +12,7 @@ int Player::getPosition() const {
 	return position;
 }
 
-void Player::fetchFromDeck(Deck& deck, int amountToFetch){
+void Player::fetchFromDeck(Deck& deck, int amountToFetch) {
 	
 	vector<Card*> given = deck.giveCards(amountToFetch);
 	receiveCards(given);
@@ -34,7 +34,7 @@ bool Player::didIwin() {
 	return this->isEmpty();
 }
 
-Player* Player::choosePlayerWithMostCards(vector<Player*> players){
+Player* Player::choosePlayerWithMostCards(vector<Player*>& players) {
 	
 	int maxCards = 0;
 	int counter = 0;
@@ -52,7 +52,7 @@ Player* Player::choosePlayerWithMostCards(vector<Player*> players){
 	return chosenPlayer;
 }
 
-Player* Player::choosePlayerCyclicly(vector<Player*> players, int previouslyChosenPlayerPosition) {
+Player* Player::choosePlayerCyclicly(vector<Player*>& players, int previouslyChosenPlayerPosition) {
 	
 	int numberOfPlayers = players.size();
 	int chosenPlayerPosition = (previouslyChosenPlayerPosition +1)%numberOfPlayers;
@@ -62,6 +62,30 @@ Player* Player::choosePlayerCyclicly(vector<Player*> players, int previouslyChos
 	}
 
 	return players[chosenPlayerPosition];
+}
+
+void Player::goTurn(vector<Player *>& players, Deck& deck) {
+
+	chosenCard = this->chooseCardToRequest();
+	chosenPlayer = this->choosePlayer(players);
+
+	vector<Card*> givenCards = chosenPlayer->giveCardsOfValue(*chosenCard);
+	if(!givenCards.empty()) {
+		this->receiveCards(givenCards);
+	}
+	else {
+		this->fetchFromDeck(deck, 1);
+	}
+}
+
+Card* Player::getChosenCard() {
+	
+	return chosenCard;
+}
+
+Player* Player::getChosenPlayer() {
+	
+	return chosenPlayer;
 }
 
 
@@ -143,10 +167,12 @@ Card* PlayerType1::chooseCardToRequest() {
 	return chosenCard;
 }
 
-Player* PlayerType1::choosePlayer(vector<Player*> players){
+Player* PlayerType1::choosePlayer(vector<Player*>& players){
 
 	return choosePlayerWithMostCards(players);
 }
+
+
 
 
 /****PlayerType2****/
@@ -254,7 +280,7 @@ Card* PlayerType2::chooseCardToRequest() {
 	return chosenCard;
 }
 
-Player* PlayerType2::choosePlayer(vector<Player*> players){
+Player* PlayerType2::choosePlayer(vector<Player*>& players){
 
 	return choosePlayerWithMostCards(players);
 }
@@ -271,24 +297,59 @@ PlayerType3::PlayerType3(string name, int position)
 Card* PlayerType3::chooseCardToRequest() {
 	
 	Card* chosenCard;
-	vector<Card*> fitgureHand = getFigureHand();
-	vector<Card*> numeircHand = getNumericHand();
+	vector<Card*> figureHand = getFigureHand();
+	vector<Card*> numericHand = getNumericHand();
 
-	if(!fitgureHand.empty()) {
-		chosenCard = fitgureHand.back();
+	if(!figureHand.empty()) {
+		chosenCard = figureHand.back();
 	}
 	else {
-		if(!numeircHand.empty()) {
-			chosenCard = numeircHand.back();
+		if(!numericHand.empty()) {
+			chosenCard = numericHand.back();
 		}
 		else
 			throw invalid_argument("Cannot choose card from empty hand!!!");
 	}
-	cout << "returnnign" << endl;
+
 	return chosenCard;
 }
 
-Player* PlayerType3::choosePlayer(vector<Player*> players){
+Player* PlayerType3::choosePlayer(vector<Player*>& players){
+	Player* chosenPlayer = choosePlayerCyclicly(players, previouslyChosenPlayerPosition);
+	previouslyChosenPlayerPosition = chosenPlayer->getPosition();
+	return chosenPlayer;
+}
+
+
+
+
+
+/****PlayerType4****/
+PlayerType4::PlayerType4(string name, int position)
+: Player(name, position), previouslyChosenPlayerPosition(-1)
+{}
+
+Card* PlayerType4::chooseCardToRequest() {
+	
+	Card* chosenCard;
+	vector<Card*> figureHand = getFigureHand();
+	vector<Card*> numericHand = getNumericHand();
+
+	if(!numericHand.empty()) {
+		chosenCard = numericHand.front();
+	}
+	else {
+		if(!figureHand.empty()) {
+			chosenCard = figureHand.front();
+		}
+		else
+			throw invalid_argument("Cannot choose card from empty hand!!!");
+	}
+
+	return chosenCard;
+}
+
+Player* PlayerType4::choosePlayer(vector<Player*>& players){
 	Player* chosenPlayer = choosePlayerCyclicly(players, previouslyChosenPlayerPosition);
 	previouslyChosenPlayerPosition = chosenPlayer->getPosition();
 	return chosenPlayer;
