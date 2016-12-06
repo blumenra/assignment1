@@ -33,7 +33,10 @@ public:
 };
 
 class PlayerType2 : public Player {  //For strategy 2
-//...
+public:
+	PlayerType2(string name, int position);
+	Card* chooseCardToRequest();
+	Player* choosePlayer(vector<Player*> players);
 };
 
 class PlayerType3 : public Player {  //For strategy 3

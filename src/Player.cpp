@@ -74,22 +74,26 @@ Card* PlayerType1::chooseCardToRequest() {
 	int counter = 1;
 	int maxFound = 1;
 
+	// cout << endl;
+	// cout << "player:" << toString() << endl;
+	// cout << "couner: " << counter << endl;
+	// cout << "minFound: " << minFound << endl;
+	// cout << "it: " << (*it)->toString() << endl;
+	// cout << "tempCard: " << tempCard->toString() << endl;
+	// cout << "chosenCard: " << chosenCard->toString() << endl;
+	// cout << endl;
+
+
 	if(!figureHand.empty()) {
 
 		tempCard = figureHand.back();
 		chosenCard = figureHand.back();
 		
 		for(vector<Card*>::reverse_iterator rit = figureHand.rbegin()+1 ; rit != figureHand.rend(); rit++){
-			// cout << "tempCard: " << tempCard->toString() << endl;
-			// cout << "rit: " << (*rit)->toString() << endl;
-			// cout << "chosenCard: " << chosenCard->toString() << endl;
-			// cout << endl;
 			if(compareFigures(tempCard->getStrValue(), (*rit)->getStrValue()) == 0) {
 				counter++;
 			}
 			else if(compareFigures(tempCard->getStrValue(), (*rit)->getStrValue()) > 0) {
-				// cout << "inside elseif- tempCard: " << tempCard->toString() << endl;
-				// cout << "inside elseif- chosenCard: " << chosenCard->toString() << endl;
 				tempCard = (*rit);
 				counter = 1;
 			}
@@ -138,6 +142,117 @@ Card* PlayerType1::chooseCardToRequest() {
 }
 
 Player* PlayerType1::choosePlayer(vector<Player*> players){
+
+	return choosePlayerWithMostCards(players);
+}
+
+
+/****PlayerType2****/
+
+PlayerType2::PlayerType2(string name, int position)
+: Player(name, position)
+{}
+
+Card* PlayerType2::chooseCardToRequest() {
+	
+	if(this->didIwin()){
+		throw invalid_argument("Cannot choose card from empty hand!!!");
+	}
+
+	Card* chosenCard;
+	Card* tempCard;
+	vector<Card*> figureHand = getFigureHand();
+	vector<Card*> numericHand = getNumericHand();
+
+
+	int counter = 1;
+	int minFound = 4;
+
+	if(!numericHand.empty()) {
+		
+		tempCard = numericHand.front();
+		chosenCard = numericHand.front();
+
+		for(vector<Card*>::iterator it = numericHand.begin()+1 ; it != numericHand.end(); it++){
+
+			if(compareNumbers(tempCard->getStrValue(), (*it)->getStrValue()) == 0) {
+				counter++;
+				// if there are 3 cards of each previous value and there are 2 last cards of the same value
+				if((it == numericHand.end()-1) && (counter < minFound)) {
+					chosenCard = tempCard;
+					minFound = counter;
+				}
+			}
+			else if(compareNumbers(tempCard->getStrValue(), (*it)->getStrValue()) < 0) {
+				
+				if(counter < minFound) {
+					chosenCard = tempCard;
+					minFound = counter;
+				}
+				
+				tempCard = (*it);
+				// if all the previous values have more than one card and the last value has one
+				if(it == numericHand.end()-1 && minFound != 1) {
+					chosenCard = tempCard;
+					minFound = 1;
+				}
+
+				counter = 1;
+			}
+			else {
+				throw invalid_argument("numericHand is out of order!!!");
+			}
+		}
+	}
+	else {
+		if(!figureHand.empty()) {
+			chosenCard = figureHand.front();
+		}
+	}
+
+	counter = 1;
+
+	if(!figureHand.empty()) {
+
+		tempCard = figureHand.front();
+		
+		for(vector<Card*>::iterator it = figureHand.begin()+1 ; it != figureHand.end(); it++){
+			if(compareFigures(tempCard->getStrValue(), (*it)->getStrValue()) == 0) {
+				counter++;
+				if((it == figureHand.end()-1) && (counter < minFound)) {
+					chosenCard = tempCard;
+					minFound = counter;
+				}
+			}
+			else if(compareFigures(tempCard->getStrValue(), (*it)->getStrValue()) < 0) {
+
+
+				if(counter < minFound) {
+					chosenCard = tempCard;
+					minFound = counter;
+				}
+				
+				tempCard = (*it);
+
+				if(it == figureHand.end()-1 && minFound != 1) {
+					chosenCard = tempCard;
+					minFound = 1;
+				}
+				
+				counter = 1;
+
+			}
+			else {
+				throw invalid_argument("FigureHand is out of order!!!");
+			}
+
+		}
+	}
+
+	return chosenCard;
+}
+
+Player* PlayerType2::choosePlayer(vector<Player*> players){
 
 	return choosePlayerWithMostCards(players);
 }
