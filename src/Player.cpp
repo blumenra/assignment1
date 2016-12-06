@@ -18,10 +18,8 @@ void Player::fetchFromDeck(Deck& deck, int amountToFetch){
 	receiveCards(given);
 }
 
-Player::~Player() {
-	delete this->chosenPlayer;
-	delete this->chosenCard;
-}
+Player::~Player()
+{}
 
 string Player::toString() {
 	
@@ -36,6 +34,23 @@ bool Player::didIwin() {
 	return this->isEmpty();
 }
 
+Player* Player::choosePlayerWithMostCards(vector<Player*> players){
+	
+	int maxCards = 0;
+	int counter = 0;
+	Player* chosenPlayer = players.front();
+
+	for(vector<Player*>::reverse_iterator rit = players.rbegin() ; rit != players.rend(); rit++){
+		counter = (*rit)->getNumberOfCards();
+
+		if(counter > maxCards && (*rit)->getPosition() != this->position){
+			chosenPlayer = *rit;
+			maxCards = counter;
+		}
+	}
+
+	return chosenPlayer;
+}
 
 
 /****PlayerType1****/
@@ -120,4 +135,9 @@ Card* PlayerType1::chooseCardToRequest() {
 	}
 
 	return chosenCard;
+}
+
+Player* PlayerType1::choosePlayer(vector<Player*> players){
+
+	return choosePlayerWithMostCards(players);
 }

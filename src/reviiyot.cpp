@@ -387,6 +387,12 @@ void playerTest() {
 	Player* playerType4 = new PlayerType1("Morty", 3);
 
 
+	vector<Player*> players;
+
+	players.push_back(playerType1);
+	players.push_back(playerType2);
+	players.push_back(playerType3);
+	players.push_back(playerType4);
 
 
 	// getName
@@ -404,10 +410,10 @@ void playerTest() {
 	cout << endl;
 
 	//fetchFromDeck
-	playerType1->fetchFromDeck(*deck, 1);
-	playerType2->fetchFromDeck(*deck, 1);
-	playerType3->fetchFromDeck(*deck, 1);
-	playerType4->fetchFromDeck(*deck, 80);
+	playerType1->fetchFromDeck(*deck, 7);
+	playerType2->fetchFromDeck(*deck, 7);
+	playerType3->fetchFromDeck(*deck, 7);
+	playerType4->fetchFromDeck(*deck, 7);
 
 	cout << "Deck after fetches: " << "\n" << deck->toString() + "\n" << endl;
 	cout << endl;
@@ -424,11 +430,17 @@ void playerTest() {
 	cout << "playerType3 didIwin?: " << playerType3->didIwin() << endl;
 	cout << "playerType4 didIwin?: " << playerType4->didIwin() << endl;
 
-	//chooseCardToRequest
-	cout << "chosen card of player1: " << playerType1->chooseCardToRequest()->toString() << endl;
-	cout << "chosen card of player2: " << playerType2->chooseCardToRequest()->toString() << endl;
-	cout << "chosen card of player3: " << playerType3->chooseCardToRequest()->toString() << endl;
-	cout << "chosen card of player4: " << playerType4->chooseCardToRequest()->toString() << endl;
+	// //chooseCardToRequest
+	// cout << "chosen card of player1: " << playerType1->chooseCardToRequest()->toString() << endl;
+	// cout << "chosen card of player2: " << playerType2->chooseCardToRequest()->toString() << endl;
+	// cout << "chosen card of player3: " << playerType3->chooseCardToRequest()->toString() << endl;
+	// cout << "chosen card of player4: " << playerType4->chooseCardToRequest()->toString() << endl;
+
+	//choosePlayer
+	cout << "chosen player of player1: " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of player2: " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of player3: " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of player4: " << playerType4->choosePlayer(players)->toString() << endl;
 }
 
 
