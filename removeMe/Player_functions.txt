@@ -3,7 +3,7 @@
 -destructor();
 
 virtual void goTurn(vector<Player *> players, Deck deck){
-	// virtual Card& chooseCardToRequest();
+	virtual Card& chooseCardToRequest();
 	virtual Player* choosePlayer(vector<Player*>){// Done for types: 1
 		// Player* choosePlayerWithMostCards(vector<Player*>);
 		OR

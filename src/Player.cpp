@@ -246,3 +246,37 @@ Player* PlayerType2::choosePlayer(vector<Player*> players){
 
 	return choosePlayerWithMostCards(players);
 }
+
+
+
+
+
+/****PlayerType3****/
+PlayerType3::PlayerType3(string name, int position)
+: Player(name, position), previouslyChosenPlayerPosition(-1)
+{}
+
+Card* PlayerType3::chooseCardToRequest() {
+	
+	Card* chosenCard;
+	vector<Card*> fitgureHand = getFigureHand();
+	vector<Card*> numeircHand = getNumericHand();
+
+	if(!fitgureHand.empty()) {
+		chosenCard = fitgureHand.back();
+	}
+	else {
+		if(!numeircHand.empty()) {
+			chosenCard = numeircHand.back();
+		}
+		else
+			throw invalid_argument("Cannot choose card from empty hand!!!");
+	}
+	cout << "returnnign" << endl;
+	return chosenCard;
+}
+
+Player* PlayerType3::choosePlayer(vector<Player*> players){
+
+	return choosePlayerWithMostCards(players);
+}
