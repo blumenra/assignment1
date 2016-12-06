@@ -43,7 +43,7 @@ public:
 	void receiveCards(vector<Card*>& cards);
 	vector<Card*> giveCardsOfValue(Card& card);
 	vector<Card*> bundleCardsToGive(vector<Card*>& subHand, int begin, int end);
-	~Hand();
+	virtual ~Hand();
 	vector<Card*> getFigureHand();
 	vector<Card*> getNumericHand();
 };
