@@ -52,6 +52,18 @@ Player* Player::choosePlayerWithMostCards(vector<Player*> players){
 	return chosenPlayer;
 }
 
+Player* Player::choosePlayerCyclicly(vector<Player*> players, int previouslyChosenPlayerPosition) {
+	
+	int numberOfPlayers = players.size();
+	int chosenPlayerPosition = (previouslyChosenPlayerPosition +1)%numberOfPlayers;
+	
+	if(chosenPlayerPosition == position){
+		chosenPlayerPosition = (chosenPlayerPosition + 1)%numberOfPlayers;
+	}
+
+	return players[chosenPlayerPosition];
+}
+
 
 /****PlayerType1****/
 
@@ -277,6 +289,9 @@ Card* PlayerType3::chooseCardToRequest() {
 }
 
 Player* PlayerType3::choosePlayer(vector<Player*> players){
-
-	return choosePlayerWithMostCards(players);
+	Player* chosenPlayer = choosePlayerCyclicly(players, previouslyChosenPlayerPosition);
+	previouslyChosenPlayerPosition = chosenPlayer->getPosition();
+	return chosenPlayer;
 }
+
+

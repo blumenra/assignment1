@@ -439,12 +439,42 @@ void playerTest() {
 	cout << "chosen card of " << playerType4->toString() << ":\n"  << playerType4->chooseCardToRequest()->toString() << endl;
 	cout << endl;
 
-	// //choosePlayer
-	// cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
-	// cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
-	// cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
-	// cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
-	// cout << endl;
+	//choosePlayer
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
+
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
+
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
+
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
+
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
+
+	cout << "chosen player of " << playerType1->getName() << ": " << playerType1->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType2->getName() << ": " << playerType2->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType3->getName() << ": " << playerType3->choosePlayer(players)->toString() << endl;
+	cout << "chosen player of " << playerType4->getName() << ": " << playerType4->choosePlayer(players)->toString() << endl;
+	cout << endl;
 
 }
 

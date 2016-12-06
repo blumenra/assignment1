@@ -22,7 +22,8 @@ public:
 	bool didIwin();
 	virtual Card* chooseCardToRequest() = 0;
 	Player* choosePlayerWithMostCards(vector<Player*> players);
-	// virtual Player* choosePlayer(vector<Player*> players) = 0;
+	Player* choosePlayerCyclicly(vector<Player*> players, int previouslyChosenPlayerPosition);
+	virtual Player* choosePlayer(vector<Player*> players) = 0;
 };
 
 class PlayerType1 : public Player {  //For strategy 1
