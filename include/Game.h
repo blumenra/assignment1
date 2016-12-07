@@ -2,6 +2,8 @@
 #define GAME_H_
 
 #include <iostream>
+#include <sstream>
+#include <fstream>
 
 #include "Player.h"
 #include "Deck.h"
@@ -13,8 +15,15 @@ private:
 	vector<Player *> players;  //The list of the players
 	Deck deck;                 //The deck of the game
 	int turn;
-	bool verbal const;
+	bool verbal;
 	vector<Player *> winners;
+	int highestNumericValue;
+
+	vector<string> parseConfigFile(char* configurationFile);
+	vector<Card*> cardsForDeckCreator(string parsedDeck);
+	Shape stringToShape(string strShape);
+	Figure stringToFigure(string strFigure);
+	bool isFigure(string value);
 public:
 	Game(char* configurationFile);
 	void init();

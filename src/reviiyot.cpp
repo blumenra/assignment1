@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 #include <Game.h>
 
@@ -32,20 +33,36 @@ int main(int argc, char **argv) {
 	// cardTest();
 	//deckTest();
 	// handTest();
-	playerTest();
+	// playerTest();
+
+
+	// char buffer[MAX_PATH];
+ //    GetModuleFileName( NULL, buffer, MAX_PATH );
+ //    string::size_type pos = string( buffer ).find_last_of( "\\/" );
+ //    string( buffer ).substr( 0, pos);
+
+	// Game game(argv[1]);
+
+
+	vector<string> configFileVec;
+	ifstream file;
+	file.open("removeMe/configurationFiles/config1.txt");
+	string line;
+	
+
+	while(getline(file, line)){
+		if(!line.empty() && (line.at(0) != '#')) {
+			cout << line << endl;
+			configFileVec.push_back(line);
+		}
+	}
+
+
+
+
+
 
 	cout << "Exiting main" << endl;
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ORIGINAL TEXT- DO NOT TOUCH!!!-------------------------------------------------
@@ -589,16 +606,6 @@ bool isFigure(string value){
 	return figure;
 }
 
-/*
-#include <fstream>
 
-ifstream theFile;
-theFile.open("/freespace/msc/brukes/Courses/SPL/assignment1/removeMe/configurationFiles/config1.txt");
-string line;
-
-while(getline(theFile, line)){
-
-}
-*/
 
 // These are for Game**************************************************************************
