@@ -16,6 +16,8 @@ private:
 
 public:
 	Deck(vector<Card*>& deck);
+	Deck(const Deck& otherDeck);
+	vector<Card*> getDeck() const;
 	bool isEmpty();
 	Card* fetchCard();   //Returns the top card of the deck and remove it rom the deck
 	int getNumberOfCards(); // Get the number of cards in the deck

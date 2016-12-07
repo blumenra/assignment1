@@ -49,3 +49,14 @@ vector<Card*> Deck::giveCards(int numberToGive){
 	}
 	return cardsToGive;
 }
+
+// Deck::Deck(const Deck& otherDeck) {
+// 	Deck deck(otherDeck.getDeck());
+// 	return deck;
+// }
+
+vector<Card*> Deck::getDeck() const {
+
+	return this->deck;
+}
+
