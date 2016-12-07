@@ -29,6 +29,7 @@ private:
 	void deal();
 public:
 	Game(char* configurationFile);
+	Game(Game& otherGame);
 	void init();
 	void play();
 	void printState();        //Print the state of the game as described in the assignment.
@@ -37,8 +38,12 @@ public:
 	bool isVerbal();
 	bool areWinners();
 	bool singleWinner();
-	vector<Player *> getPlayers();
+	vector<Player *> getPlayers() const;
 	void printTurn();
+	int getHighestNumericValue() const;
+	int getTurn() const;
+	Deck getDeck() const;
+	vector<Player *> getWinners() const;
 };
 
 #endif

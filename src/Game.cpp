@@ -9,22 +9,26 @@ turn(1),
 deck(deckCreator(configFileVec[2])),
 players(playersCreator(configFileVec)),
 winners()
-{}
+{
+	configFileVec.clear();
+}
 
-// 	this->verbal = stoi(configFileVec[0]);
-// 	this->highestNumericValue = stoi(configFileVec[1]);
-
-
-// }
+// Game::Game(Game& otherGame):
+// configFileVec(),
+// verbal(otherGame.isVerbal()),
+// highestNumericValue(otherGame.getHighestNumericValue()),
+// turn(otherGame.getTurn()),
+// deck(otherGame.getDeck()),
+// players(otherGame.getPlayers()),
+// winners(otherGame.getWinners())
+// {}
 
 vector<string> Game::parseConfigFile(char* configurationFile) {
 
 	vector<string> configFileVec;
 	ifstream file;
 
-	// string path = "removeMe/configurationFiles/";
 	string fileName(configurationFile);
-	// string fullPath = path + fileName;
 	file.open(configurationFile);
 
 	string line;
@@ -185,7 +189,7 @@ void Game::init() {
 	deal();
 }
 
-vector<Player *> Game::getPlayers(){
+vector<Player *> Game::getPlayers() const {
 
 	return players;
 }
@@ -256,3 +260,48 @@ void Game::play(){
 		}
 	}
 }
+
+int Game::getHighestNumericValue() const {
+
+	return highestNumericValue;
+}
+
+int Game::getTurn() const {
+
+	return turn;
+}
+
+Deck Game::getDeck() const {
+
+	return deck;
+}
+
+vector<Player *> Game::getWinners() const {
+
+	return winners;
+}
+
+// void Game::copy(Game& otherGame) {
+	
+// 	this->verbal = otherGame.isVerbal();
+// 	this->highestNumericValue = otherGame.getHighestNumericValue();
+// 	this->turn = otherGame.getTurn();
+	
+// 	this->deck = otherGame.getDeckVec();
+
+	
+// 	vector<Player *> players;
+// 	vector<Player *> winners;
+// }
+
+
+// Game& Game::operator=(Game& game) {
+
+// 	if(this != &game) {
+		
+// 		this->copy(game);
+// 		// Game newGame(game);
+// 	}
+
+// 	return *this;
+// }
