@@ -2,7 +2,8 @@
 #include <Hand.h>
 
 // Card constructor
-Card::Card(Shape shape): shape(shape)
+Card::Card(Shape shape):
+shape(shape)
 {}
 
 Shape Card::getShape() const {
@@ -34,8 +35,7 @@ Card(shape),
 figure(figure)
 {}
 
-FigureCard::FigureCard(Card& otherFigureCard)
-:
+FigureCard::FigureCard(Card& otherFigureCard):
 Card(otherFigureCard.getShape()),
 figure(stringToFigure(otherFigureCard.getStrValue()))
 {}
@@ -108,8 +108,7 @@ Card(shape),
 number(number)
 {}
 
-NumericCard::NumericCard(Card& otherNumericCard)
-:
+NumericCard::NumericCard(Card& otherNumericCard):
 Card(otherNumericCard.getShape()),
 number(stoi(otherNumericCard.getStrValue()))
 {}
