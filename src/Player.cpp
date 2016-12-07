@@ -1,13 +1,19 @@
  #include <Player.h>
 
-Player::Player(string name, int position)
-: Hand(), name(name), position(position)
+Player::Player(string name, int position):
+Hand(),
+name(name),
+position(position),
+chosenCardValue(""),
+previouslyChosenPlayerPosition(-1)
 {}
 
 Player::Player(const Player& otherPlayer):
 Hand(otherPlayer),
 name(otherPlayer.getName()),
-position(otherPlayer.getPosition())
+position(otherPlayer.getPosition()),
+chosenCardValue(""),
+previouslyChosenPlayerPosition(-1)
 {}
 
 string Player::getName() const {
@@ -16,6 +22,11 @@ string Player::getName() const {
 
 int Player::getPosition() const {
 	return position;
+}
+
+string Player::getChosenCardValue() const{
+
+	return chosenCardValue;
 }
 
 void Player::fetchFromDeck(Deck& deck, int amountToFetch) {
@@ -92,6 +103,11 @@ Card* Player::getChosenCard() {
 Player* Player::getChosenPlayer() {
 	
 	return chosenPlayer;
+}
+
+int Player::getPreviouslyChosenPlayerPosition() const {
+	
+	return previouslyChosenPlayerPosition;
 }
 
 
@@ -305,7 +321,11 @@ Player* PlayerType2::choosePlayer(vector<Player*>& players){
 
 /****PlayerType3****/
 PlayerType3::PlayerType3(string name, int position)
-: Player(name, position), previouslyChosenPlayerPosition(-1)
+: Player(name, position)
+{}
+
+PlayerType3::PlayerType3(const Player& otherPlayerType3):
+Player(otherPlayerType3)
 {}
 
 Card* PlayerType3::chooseCardToRequest() {
@@ -337,10 +357,13 @@ Player* PlayerType3::choosePlayer(vector<Player*>& players){
 
 
 
-
 /****PlayerType4****/
 PlayerType4::PlayerType4(string name, int position)
-: Player(name, position), previouslyChosenPlayerPosition(-1)
+: Player(name, position)
+{}
+
+PlayerType4::PlayerType4(const Player& otherPlayerType4):
+Player(otherPlayerType4)
 {}
 
 Card* PlayerType4::chooseCardToRequest() {

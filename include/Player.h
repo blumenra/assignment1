@@ -13,7 +13,11 @@ private:
 	const int position;
 	Card* chosenCard;
 	Player* chosenPlayer;
+	string chosenCardValue;
 
+protected:
+	int previouslyChosenPlayerPosition;
+	
 public:
 	Player(string name, int position);
 	Player(const Player& otherPlayer);
@@ -21,6 +25,7 @@ public:
 	Card* getChosenCard();
 	Player* getChosenPlayer();
 	int getPosition() const;
+	string getChosenCardValue() const;
 	virtual void fetchFromDeck(Deck& deck, int amountToFetch);
 	virtual ~Player();
 	string toString();
@@ -30,6 +35,7 @@ public:
 	Player* choosePlayerCyclicly(vector<Player*>& players, int previouslyChosenPlayerPosition);
 	virtual Player* choosePlayer(vector<Player*>& players) = 0;
 	virtual void goTurn(vector<Player *>& players, Deck& deck);
+	virtual int getPreviouslyChosenPlayerPosition() const;
 };
 
 class PlayerType1 : public Player {  //For strategy 1
@@ -49,8 +55,6 @@ public:
 };
 
 class PlayerType3 : public Player {  //For strategy 3
-private:
-	int previouslyChosenPlayerPosition;
 public:
 	PlayerType3(string name, int position);
 	PlayerType3(const Player& otherPlayerType3);
@@ -59,9 +63,6 @@ public:
 };
 
 class PlayerType4 : public Player {  //For strategy 4
-//...
-private:
-	int previouslyChosenPlayerPosition;
 public:
 	PlayerType4(string name, int position);
 	PlayerType4(const Player& otherPlayerType4);

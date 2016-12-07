@@ -561,9 +561,15 @@ void playerTest() {
 	cout << playerType2->toString() << endl;
 	cout << endl;
 
+	Player* copiedPlayer3 = new PlayerType3(*playerType3);
+	cout << "copiedPlayer3: " << copiedPlayer3->toString() << endl;
+	cout << playerType3->toString() << endl;
+	cout << endl;
 
-
-
+	Player* copiedPlayer4 = new PlayerType4(*playerType4);
+	cout << "copiedPlayer4: " << copiedPlayer4->toString() << endl;
+	cout << playerType4->toString() << endl;
+	cout << endl;
 
 	cout << "Exiting PlayerTest" << endl;
 }
