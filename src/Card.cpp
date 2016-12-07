@@ -2,7 +2,8 @@
 #include <Hand.h>
 
 // Card constructor
-Card::Card(Shape shape): shape(shape) {}
+Card::Card(Shape shape): shape(shape)
+{}
 
 Shape Card::getShape() const {
 	return this->shape;
@@ -26,10 +27,21 @@ string Card::shapeToString(Shape shape) {
 
 Card::~Card() {}
 
-// FigureCard constructor
-FigureCard::FigureCard(Shape shape, Figure figure): Card(shape), figure(figure) {}
+
+/**FigureCard constructor**/
+FigureCard::FigureCard(Shape shape, Figure figure):
+Card(shape),
+figure(figure)
+{}
+
+FigureCard::FigureCard(Card& otherFigureCard)
+:
+Card(otherFigureCard.getShape()),
+figure(stringToFigure(otherFigureCard.getStrValue()))
+{}
 
 string FigureCard::getStrValue() {
+	
 	return this->toString().substr(0, toString().length()-1);
 }
 
@@ -59,13 +71,51 @@ string FigureCard::figureToString(Figure figure) const {
 }
 
 vector<int> FigureCard::valuateMe(Hand& hand) {
+
 	return hand.findCardsByValue(*this);
 }
 
-// NumericCard constructor
-NumericCard::NumericCard(Shape shape, int number): Card(shape), number(number) {}
+
+Figure FigureCard::stringToFigure(string strFigure) const {
+	
+	Figure figureJ(Jack);
+	Figure figureQ(Queen);
+	Figure figureK(King);
+	Figure figureA(Ace);
+
+	if(strFigure == "J"){
+		return figureJ;
+	}
+	else if(strFigure == "Q"){
+		return figureQ;
+	}
+	else if(strFigure == "K"){
+		return figureK;
+	}
+	else if(strFigure == "A"){
+		return figureA;
+	}
+	else{
+		throw invalid_argument("The card's figure is invalid!!!");
+	}
+}
+
+
+
+/**NumericCard constructor**/
+NumericCard::NumericCard(Shape shape, int number):
+Card(shape),
+number(number)
+{}
+
+NumericCard::NumericCard(Card& otherNumericCard)
+:
+Card(otherNumericCard.getShape()),
+number(stoi(otherNumericCard.getStrValue()))
+{}
 
 string NumericCard::getStrValue() {
+	
 	return this->toString().substr(0, toString().length()-1);
 }
 
@@ -79,5 +129,8 @@ string NumericCard::toString() {
 }
 
 vector<int> NumericCard::valuateMe(Hand& hand) {
+	
 	return hand.findCardsByValue(*this);
 }
+
+

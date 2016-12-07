@@ -22,7 +22,7 @@ void playerTest();
 // These are for Game**************************************************************************
 vector<Card*> cardsForDeckCreator(string parsedDeck);
 Shape stringToShape(string strShape);
-Figure stringToFigure(string strFigure);
+Figure stringToFigureForTest(string strFigure);
 bool isFigure(string value);
 // These are for Game**************************************************************************
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 
 
 
-	// cardTest();
+	cardTest();
 	//deckTest();
 	// handTest();
 	// playerTest();
@@ -44,18 +44,18 @@ int main(int argc, char **argv) {
 	// Game game(argv[1]);
 
 
-	vector<string> configFileVec;
-	ifstream file;
-	file.open("removeMe/configurationFiles/config1.txt");
-	string line;
+	// vector<string> configFileVec;
+	// ifstream file;
+	// file.open("removeMe/configurationFiles/config1.txt");
+	// string line;
 	
 
-	while(getline(file, line)){
-		if(!line.empty() && (line.at(0) != '#')) {
-			cout << line << endl;
-			configFileVec.push_back(line);
-		}
-	}
+	// while(getline(file, line)){
+	// 	if(!line.empty() && (line.at(0) != '#')) {
+	// 		cout << line << endl;
+	// 		configFileVec.push_back(line);
+	// 	}
+	// }
 
 
 
@@ -115,8 +115,27 @@ void cardTest() {
 
 	cout << "getStrNumber of numericCard:" << numericCard->getStrValue() + "\n" << endl;
 
+	//copy constructor figureCard
+	Card* copiedFigureCard = new FigureCard(*figuredCard);
+	cout << "copiedFigureCard: " << copiedFigureCard->toString() << endl;
+	cout << "toString of card (figured): " << figuredCard->toString() + "\n" << endl;
+	delete figuredCard;
+	cout << "copiedFigureCard: " << copiedFigureCard->toString() << endl;
+	// cout << "toString of card (figured): " << figuredCard->toString() + "\n" << endl;
+	cout << endl;
+
+	//copy constructor numericCard
+	Card* copiedNumericCard = new NumericCard(*numericCard);
+	cout << "copiedNumericCard: " << copiedNumericCard->toString() << endl;
+	cout << "toString of card (numeric): " << numericCard->toString() + "\n" << endl;
+	delete numericCard;
+	cout << "copiedNumericCard: " << copiedNumericCard->toString() << endl;
+	// cout << "toString of card (numeric): " << numericCard->toString() + "\n" << endl;
+	cout << endl;
 
 
+
+	
 	cout << "Exiting cardTest!" << endl;
 }
 
@@ -539,7 +558,7 @@ vector<Card*> cardsForDeckCreator(string parsedDeck) {
 		string strValue = (*it).substr(0, itLength -1);
 		string strShape = (*it).substr(itLength -1, 1);
 		if(isFigure(strValue)){
-			cards.push_back(new FigureCard(stringToShape(strShape), stringToFigure(strValue)));
+			cards.push_back(new FigureCard(stringToShape(strShape), stringToFigureForTest(strValue)));
 		}
 		else{
 			cards.push_back(new NumericCard(stringToShape(strShape), stoi(strValue)));
@@ -573,7 +592,7 @@ Shape stringToShape(string strShape) {
 	}
 }
 
-Figure stringToFigure(string strFigure) {
+Figure stringToFigureForTest(string strFigure) {
 	
 	Figure figureJ(Jack);
 	Figure figureQ(Queen);
