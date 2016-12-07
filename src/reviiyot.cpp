@@ -30,8 +30,8 @@ int main(int argc, char **argv) {
 
 
 
-	cardTest();
-	//deckTest();
+	// cardTest();
+	deckTest();
 	// handTest();
 	// playerTest();
 
@@ -135,7 +135,7 @@ void cardTest() {
 
 
 
-	
+
 	cout << "Exiting cardTest!" << endl;
 }
 
@@ -181,28 +181,34 @@ void deckTest() {
 
 	cards2 = deck.giveCards(1);
 
-	Deck deck2(cards2);
+	Deck* deck2 = new Deck(cards2);
 
-	cout << "Is this deck2 empty?: " << deck2.isEmpty() << endl;
+	// cout << "Is this deck2 empty?: " << deck2.isEmpty() << endl;
 
-	cout << "The deck2's size?: " << deck2.getNumberOfCards() << endl;
+	// cout << "The deck2's size?: " << deck2.getNumberOfCards() << endl;
 
-	cout << "Deck2: " << deck2.toString() << endl;
+	// cout << "Deck2: " << deck2.toString() << endl;
 
-	// cout << "toString of fetched card: " << deck.fetchCard()->toString() + "\n" << endl;
+	// // cout << "toString of fetched card: " << deck.fetchCard()->toString() + "\n" << endl;
 
-	cout << "Is this deck2 empty?: " << deck2.isEmpty() << endl;
+	// cout << "Is this deck2 empty?: " << deck2.isEmpty() << endl;
 
-	cout << "The deck2's size?: " << deck2.getNumberOfCards() << endl;
+	// cout << "The deck2's size?: " << deck2.getNumberOfCards() << endl;
 
-	cout << "Deck2: " << deck2.toString() << endl;
+	// cout << "Deck2: " << deck2.toString() << endl;
 
-	cout << "Is this deck empty?: " << deck.isEmpty() << endl;
+	// cout << "Is this deck empty?: " << deck.isEmpty() << endl;
 
-	cout << "The deck's size?: " << deck.getNumberOfCards() << endl;
+	// cout << "The deck's size?: " << deck.getNumberOfCards() << endl;
 
-	cout << "Deck: " << deck.toString() << endl;
+	// cout << "Deck: " << deck.toString() << endl;
+	// cout << endl;
 
+
+	// copy constructor
+	Deck copiedDeck(*deck2);
+	cout << "copiedDeck: " << copiedDeck.toString() << endl;
+	cout << endl;
 
 
 	cout << "Exiting deckTest!" << endl;

@@ -1,7 +1,14 @@
 #include <Deck.h>
 
 //Deck Constructor
-Deck::Deck(vector<Card*>& deck): deck(deck) {}
+Deck::Deck(vector<Card*>& deck):
+deck(deck)
+{}
+
+Deck::Deck(const Deck& deck):
+deck(deck.getDeck())
+
+{}
 
 bool Deck::isEmpty(){
 	return this->deck.empty();
