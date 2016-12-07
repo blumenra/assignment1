@@ -84,6 +84,7 @@ Player* Player::choosePlayerCyclicly(vector<Player*>& players, int previouslyCho
 void Player::goTurn(vector<Player *>& players, Deck& deck) {
 
 	chosenCard = this->chooseCardToRequest();
+	chosenCardValue = chosenCard->getStrValue();
 	chosenPlayer = this->choosePlayer(players);
 
 	vector<Card*> givenCards = chosenPlayer->giveCardsOfValue(*chosenCard);
