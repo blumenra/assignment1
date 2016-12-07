@@ -4,6 +4,12 @@ Player::Player(string name, int position)
 : Hand(), name(name), position(position)
 {}
 
+Player::Player(const Player& otherPlayer):
+Hand(otherPlayer),
+name(otherPlayer.getName()),
+position(otherPlayer.getPosition())
+{}
+
 string Player::getName() const {
 	return name;
 }
@@ -95,6 +101,10 @@ PlayerType1::PlayerType1(string name, int position)
 : Player(name, position)
 {}
 
+PlayerType1::PlayerType1(const Player& otherPlayerType1):
+Player(otherPlayerType1)
+{}
+
 Card* PlayerType1::chooseCardToRequest() {
 	
 	if(this->didIwin()){
@@ -179,6 +189,10 @@ Player* PlayerType1::choosePlayer(vector<Player*>& players){
 
 PlayerType2::PlayerType2(string name, int position)
 : Player(name, position)
+{}
+
+PlayerType2::PlayerType2(const Player& otherPlayerType2):
+Player(otherPlayerType2)
 {}
 
 Card* PlayerType2::chooseCardToRequest() {

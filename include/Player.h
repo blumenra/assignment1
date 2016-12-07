@@ -16,6 +16,7 @@ private:
 
 public:
 	Player(string name, int position);
+	Player(const Player& otherPlayer);
 	string getName() const;   //Returns the name of the player
 	Card* getChosenCard();
 	Player* getChosenPlayer();
@@ -34,6 +35,7 @@ public:
 class PlayerType1 : public Player {  //For strategy 1
 public:
 	PlayerType1(string name, int position);
+	PlayerType1(const Player& otherPlayerType1);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };
@@ -41,6 +43,7 @@ public:
 class PlayerType2 : public Player {  //For strategy 2
 public:
 	PlayerType2(string name, int position);
+	PlayerType2(const Player& otherPlayerType2);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };
@@ -50,6 +53,7 @@ private:
 	int previouslyChosenPlayerPosition;
 public:
 	PlayerType3(string name, int position);
+	PlayerType3(const Player& otherPlayerType3);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };
@@ -60,6 +64,7 @@ private:
 	int previouslyChosenPlayerPosition;
 public:
 	PlayerType4(string name, int position);
+	PlayerType4(const Player& otherPlayerType4);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };

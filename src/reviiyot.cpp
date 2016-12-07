@@ -31,9 +31,9 @@ int main(int argc, char **argv) {
 
 
 	// cardTest();
-	deckTest();
+	// deckTest();
 	// handTest();
-	// playerTest();
+	playerTest();
 
 
 	// char buffer[MAX_PATH];
@@ -398,6 +398,14 @@ void handTest() {
 	cout << "\n" << "Hand3: " << hand3.toString() << endl;
 	cout << "was the card found and deleted? " << hand3.removeCard(*numericCard28) << endl;
 	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << endl;
+
+	//copy constructor
+	Hand* copiedHand = new Hand(hand3);
+	cout << "copiedHand: " << copiedHand->toString() << endl;
+	cout << "\n" << "Hand3: " << hand3.toString() << endl;
+	cout << endl;
+
 }
 
 void printIntVector(vector<int> vec) {
@@ -541,6 +549,23 @@ void playerTest() {
 	cout << playerType4->getName()  << " asked " << playerType4->getChosenPlayer()->getName()  << " for the value " << playerType4->getChosenCard()->getStrValue() << endl;
 	cout << endl;
 	
+
+	// copy constructor
+	Player* copiedPlayer1 = new PlayerType1(*playerType1);
+	cout << "copiedPlayer1: " << copiedPlayer1->toString() << endl;
+	cout << playerType1->toString() << endl;
+	cout << endl;
+
+	Player* copiedPlayer2 = new PlayerType2(*playerType2);
+	cout << "copiedPlayer2: " << copiedPlayer2->toString() << endl;
+	cout << playerType2->toString() << endl;
+	cout << endl;
+
+
+
+
+
+	cout << "Exiting PlayerTest" << endl;
 }
 
 
