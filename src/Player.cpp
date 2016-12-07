@@ -90,6 +90,7 @@ void Player::goTurn(vector<Player *>& players, Deck& deck) {
 	vector<Card*> givenCards = chosenPlayer->giveCardsOfValue(*chosenCard);
 	if(!givenCards.empty()) {
 		this->receiveCards(givenCards);
+		chosenPlayer->fetchFromDeck(deck, givenCards.size());
 	}
 	else {
 		this->fetchFromDeck(deck, 1);
@@ -231,6 +232,10 @@ Card* PlayerType2::chooseCardToRequest() {
 		
 		tempCard = numericHand.front();
 		chosenCard = numericHand.front();
+		
+		if(numericHand.size() == 1){
+			minFound = 1;
+		}
 
 		for(vector<Card*>::iterator it = numericHand.begin()+1 ; it != numericHand.end(); it++){
 
@@ -274,6 +279,10 @@ Card* PlayerType2::chooseCardToRequest() {
 	if(!figureHand.empty()) {
 
 		tempCard = figureHand.front();
+
+		if(figureHand.size() == 1){
+			minFound = 1;
+		}
 		
 		for(vector<Card*>::iterator it = figureHand.begin()+1 ; it != figureHand.end(); it++){
 			if(compareFigures(tempCard->getStrValue(), (*it)->getStrValue()) == 0) {
