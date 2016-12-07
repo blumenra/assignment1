@@ -28,6 +28,10 @@ string Card::shapeToString(Shape shape) {
 
 Card::~Card() {}
 
+bool Card::isNumeric() const {
+
+	return !this->isFigure();
+}
 
 /**FigureCard constructor**/
 FigureCard::FigureCard(Shape shape, Figure figure):
@@ -100,7 +104,10 @@ Figure FigureCard::stringToFigure(string strFigure) const {
 	}
 }
 
+bool FigureCard::isFigure() const {
 
+	return true;
+}
 
 /**NumericCard constructor**/
 NumericCard::NumericCard(Shape shape, int number):
@@ -132,4 +139,7 @@ vector<int> NumericCard::valuateMe(Hand& hand) {
 	return hand.findCardsByValue(*this);
 }
 
+bool NumericCard::isFigure() const {
 
+	return false;
+}

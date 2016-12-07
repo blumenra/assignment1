@@ -36,6 +36,8 @@ public:
  	virtual vector<int> valuateMe(Hand& hand) = 0;
  	// virtual Card& operator=(const Card& otherCard) = 0;
  	// void setShape(Shape shape);
+ 	virtual bool isFigure() const = 0;
+ 	virtual bool isNumeric() const;
 };
 
 class FigureCard : public Card {
@@ -50,6 +52,7 @@ public:
 	string getStrValue();
 	virtual string toString() override;
 	vector<int> valuateMe(Hand& hand) override;
+	bool isFigure() const;
 	// Card& operator=(const Card& otherFigureCard);
 };
 
@@ -63,6 +66,7 @@ public:
 	virtual string toString() override;
 	vector<int> valuateMe(Hand& hand) override;
 	Card& operator=(const Card& otherCard);
+	bool isFigure() const;
 
 };
 
