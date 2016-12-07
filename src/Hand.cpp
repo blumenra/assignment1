@@ -3,6 +3,11 @@
 
 Hand::Hand() {}
 
+Hand::Hand(const Hand& otherHand):
+figureHand(otherHand.getFigureHand()),
+numericHand(otherHand.getNumericHand())
+{}
+
 // CONSTRACTOR FOR DEBUGGING ONLY (can be removed later..)
 Hand::Hand(vector<Card*>& figureHand, vector<Card*>& numericHand)
 : figureHand(figureHand), numericHand(numericHand)
@@ -391,10 +396,10 @@ Hand::~Hand(){
 	}
 }
 
-vector<Card*> Hand::getFigureHand() {
+vector<Card*> Hand::getFigureHand() const {
 	return this->figureHand;
 }
 
-vector<Card*> Hand::getNumericHand() {
+vector<Card*> Hand::getNumericHand() const {
 	return this->numericHand;	
 }
