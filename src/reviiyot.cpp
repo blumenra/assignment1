@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
 	// cardTest();
 	// deckTest();
 	// handTest();
-	playerTest();
+	// playerTest();
 
 
 	// char buffer[MAX_PATH];
@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 	// 	}
 	// }
 
-	gameTest();
+	// gameTest();
 
 
 
@@ -70,34 +70,34 @@ int main(int argc, char **argv) {
 
 
 
-	cout << "Exiting main" << endl;
+	// cout << "Exiting main" << endl;
 
 
 // ORIGINAL TEXT- DO NOT TOUCH!!!-------------------------------------------------
 	
-	// char* configurationFile = argv[1];
+	char* configurationFile = argv[1];
 
-	// Game game = Game(configurationFile);
-	// game.init();
- // 	Game initializedGame = game;
- // 	game.play();  
+	Game game = Game(configurationFile);
+	game.init();
+ 	// Game initializedGame = game;
+ 	game.play();  
 
-	// cout << std::endl;
- // 	game.printWinner();
-	// game.printNumberOfTurns();
-	// cout << "----------" << endl;
-	// cout<<"Initial State:"<<endl;
- //  	initializedGame.printState();
-	// cout<<"----------"<<endl;
-	// cout<<"Final State:"<<endl;
-	// game.printState();
+	cout << std::endl;
+ 	game.printWinner();
+	game.printNumberOfTurns();
+	cout << "----------" << endl;
+	cout<<"Initial State:"<<endl;
+  	// initializedGame.printState();
+	cout<<"----------"<<endl;
+	cout<<"Final State:"<<endl;
+	game.printState();
 
 // ORIGINAL TEXT- DO NOT TOUCH!!!-------------------------------------------------
 
 	return 0;
 }
 
-
+/*
 void cardTest() {
 
 	cout << "start main:" << endl;
@@ -591,15 +591,15 @@ void playerTest() {
 	cout << endl;
 
 	cout << "Exiting PlayerTest" << endl;
-}
+}*/
 
-void gameTest(){
+/*void gameTest(){
 	
 	// vector<string> configFileVec = parseConfigFile("config1.txt");
 
 	// vector<Player *> players = playersCreator(configFileVec);
 	//Constructor
-	Game game("config1.txt");
+	Game game("config2.txt");
 
 	//isVerbal
 	cout << "verbal? " << game.isVerbal() << endl;
@@ -612,7 +612,7 @@ void gameTest(){
 
 	//init
 	game.init();
-	printPlayerVector(game.getPlayers());
+	// printPlayerVector(game.getPlayers());
 
 	cout << endl;
 	//printState
@@ -626,10 +626,9 @@ void gameTest(){
 
 	//play
 	game.play();
+}*/
 
-}
-
-// These are for Game**************************************************************************
+/*// These are for Game**************************************************************************
 vector<Card*> cardsForDeckCreator(string parsedDeck) {
 
 	stringstream parsedDeckss(parsedDeck);
@@ -773,3 +772,4 @@ vector<Player *> playersCreator(vector<string> configFileVec){
 }
 
 // These are for Game**************************************************************************
+*/

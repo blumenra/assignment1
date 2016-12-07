@@ -22,17 +22,16 @@ vector<string> Game::parseConfigFile(char* configurationFile) {
 	vector<string> configFileVec;
 	ifstream file;
 
-	string path = "removeMe/configurationFiles/";
+	// string path = "removeMe/configurationFiles/";
 	string fileName(configurationFile);
-	string fullPath = path + fileName;
-	file.open(fullPath);
+	// string fullPath = path + fileName;
+	file.open(configurationFile);
 
 	string line;
 	
 
 	while(getline(file, line)){
 		if(!line.empty() && (line.at(0) != '#')) {
-			cout << line << endl;
 			configFileVec.push_back(line);
 		}
 	}
@@ -129,7 +128,6 @@ bool Game::isFigure(string value){
 
 vector<Player *> Game::playersCreator(vector<string> configFileVec){
 
-	cout << endl;
 	vector<Player *> players;
 	int position = 0;
 	for(vector<string>::iterator it = configFileVec.begin() + 3; it != configFileVec.end(); it++){
@@ -152,10 +150,6 @@ vector<Player *> Game::playersCreator(vector<string> configFileVec){
 		else{
 			throw invalid_argument("The player type is invalid!!!");
 		}
-
-		cout << "player position: " << players[position]->getPosition() << endl;
-		cout << "player name: " << players[position]->getName() << endl;
-		cout << "" << endl;
 
 		position++;
 	}
@@ -232,7 +226,7 @@ void Game::play(){
 
 	while(!areWinners()){
 
-		for(vector<Player *>::iterator it = players.begin(); it != players.end() && !areWinners(); it++){
+		for(vector<Player *>::iterator it = players.begin(); it != players.end(); it++){
 			
 			if(isVerbal()){
 				printTurn();
@@ -250,7 +244,11 @@ void Game::play(){
 			}
 				
 			if((*it)->getChosenPlayer()->didIwin()){
-				winners.push_back((*it)->getChosenPlayer());
+				winners.insert(winners.begin(), (*it)->getChosenPlayer());
+			}
+
+			if(areWinners()){
+				break;
 			}
 
 			turn++;
