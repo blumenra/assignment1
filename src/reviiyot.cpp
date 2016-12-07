@@ -12,12 +12,16 @@
 
 using namespace std;
 
+vector<string> parseConfigFile(char* configurationFile);
+vector<Player *> playersCreator(vector<string> configFileVec);
+void printPlayerVector(vector<Player *> players);
 void printIntVector(vector<int> vec);
 void printCardVector(vector<Card*>& vec);
 void cardTest();
 void deckTest();
 void handTest();
 void playerTest();
+void gameTest();
 
 // These are for Game**************************************************************************
 vector<Card*> cardsForDeckCreator(string parsedDeck);
@@ -43,19 +47,7 @@ int main(int argc, char **argv) {
 
 	// Game game(argv[1]);
 
-
-	vector<string> configFileVec;
-	ifstream file;
-	file.open("removeMe/configurationFiles/config1.txt");
-	string line;
-	
-
-	while(getline(file, line)){
-		if(!line.empty() && (line.at(0) != '#')) {
-			cout << line << endl;
-			configFileVec.push_back(line);
-		}
-	}
+	gameTest();
 
 
 
@@ -382,6 +374,17 @@ void printIntVector(vector<int> vec) {
 	cout << endl;
 }
 
+void printPlayerVector(vector<Player *> players){
+	
+	cout << endl;
+	cout << "players: " << endl;
+	for(vector<Player *>::iterator it = players.begin(); it != players.end(); it++){
+
+		cout << (*it)->toString() << endl;
+	}
+	cout << endl;
+}
+
 void printCardVector(vector<Card*>& vec) {
 	for(vector<Card*>::iterator it = vec.begin() ; it != vec.end(); it++){
 		cout << (*it)->toString() + " ";
@@ -518,6 +521,41 @@ void playerTest() {
 	
 }
 
+void gameTest(){
+	
+	// vector<string> configFileVec = parseConfigFile("config1.txt");
+
+	// vector<Player *> players = playersCreator(configFileVec);
+	//Constructor
+	Game game("config1.txt");
+
+	//isVerbal
+	cout << "verbal? " << game.isVerbal() << endl;
+
+	//areWinners
+	cout << "areWinners " << game.areWinners() << endl;
+
+	//singleWinner
+	cout << "singleWinner " << game.singleWinner() << endl;
+
+	//init
+	game.init();
+	printPlayerVector(game.getPlayers());
+
+	cout << endl;
+	//printState
+	cout << "printState" << endl;
+	game.printState();
+
+	//printNumberOfTurns
+	game.printNumberOfTurns();
+
+	cout << endl;
+
+	//play
+	game.play();
+
+}
 
 // These are for Game**************************************************************************
 vector<Card*> cardsForDeckCreator(string parsedDeck) {
@@ -606,6 +644,60 @@ bool isFigure(string value){
 	return figure;
 }
 
+vector<string> parseConfigFile(char* configurationFile) {
 
+	vector<string> configFileVec;
+	ifstream file;
+	string path = "removeMe/configurationFiles/";
+	string fileName(configurationFile);
+	string fullPath = path + fileName;
+	file.open(fullPath);
+	string line;
+	
+
+	while(getline(file, line)){
+		if(!line.empty() && (line.at(0) != '#')) {
+			cout << line << endl;
+			configFileVec.push_back(line);
+		}
+	}
+
+	return configFileVec;
+}
+
+vector<Player *> playersCreator(vector<string> configFileVec){
+
+	vector<Player *> players;
+	int position = 0;
+	for(vector<string>::iterator it = configFileVec.begin() + 3; it != configFileVec.end(); it++){
+		int itLength = (*it).length();
+		string name = (*it).substr(0, itLength -2);
+		int type = stoi((*it).substr(itLength -1, 1));
+
+		if(type == 1){
+			players.push_back(new PlayerType1(name, position));
+		}
+		else if(type == 2){
+			players.push_back(new PlayerType2(name, position));
+		}
+		else if(type == 3){
+			players.push_back(new PlayerType3(name, position));
+		}
+		else if(type == 4){
+			players.push_back(new PlayerType4(name, position));
+		}
+		else{
+			throw invalid_argument("The player type is invalid!!!");
+		}
+
+		cout << "player position: " << players[position]->getPosition() << endl;
+		cout << "player name: " << players[position]->getName() << endl;
+		cout << "" << endl;
+
+		position++;
+	}
+
+	return players;
+}
 
 // These are for Game**************************************************************************

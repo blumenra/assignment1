@@ -1,7 +1,7 @@
  #include <Player.h>
 
 Player::Player(string name, int position)
-: Hand(), name(name), position(position)
+: Hand(), name(name), position(position), chosenCardValue("")
 {}
 
 string Player::getName() const {
@@ -10,6 +10,11 @@ string Player::getName() const {
 
 int Player::getPosition() const {
 	return position;
+}
+
+string Player::getChosenCardValue() const{
+
+	return chosenCardValue;
 }
 
 void Player::fetchFromDeck(Deck& deck, int amountToFetch) {
@@ -67,6 +72,7 @@ Player* Player::choosePlayerCyclicly(vector<Player*>& players, int previouslyCho
 void Player::goTurn(vector<Player *>& players, Deck& deck) {
 
 	chosenCard = this->chooseCardToRequest();
+	chosenCardValue = chosenCard->getStrValue();
 	chosenPlayer = this->choosePlayer(players);
 
 	vector<Card*> givenCards = chosenPlayer->giveCardsOfValue(*chosenCard);

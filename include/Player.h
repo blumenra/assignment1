@@ -13,6 +13,7 @@ private:
 	const int position;
 	Card* chosenCard;
 	Player* chosenPlayer;
+	string chosenCardValue;
 
 public:
 	Player(string name, int position);
@@ -20,6 +21,7 @@ public:
 	Card* getChosenCard();
 	Player* getChosenPlayer();
 	int getPosition() const;
+	string getChosenCardValue() const;
 	virtual void fetchFromDeck(Deck& deck, int amountToFetch);
 	virtual ~Player();
 	string toString();
