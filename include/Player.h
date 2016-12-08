@@ -38,6 +38,8 @@ public:
 	virtual void goTurn(vector<Player *>& players, Deck& deck);
 	virtual int getPreviouslyChosenPlayerPosition();
 	int getPlayerType();
+	void copy(Player& otherPlayer);
+	Player& operator=(Player& otherPlayer);
 };
 
 class PlayerType1 : public Player {  //For strategy 1

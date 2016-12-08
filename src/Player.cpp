@@ -12,57 +12,7 @@ playerType(playerType)
 
 Player::Player(Player& otherPlayer) {
 	
-	this->name = otherPlayer.getName();
-	this->position = otherPlayer.getPosition();
-	this->chosenCardValue = getChosenCardValue();
-	this->previouslyChosenPlayerPosition = otherPlayer.getPreviouslyChosenPlayerPosition();
-	this->chosenPlayerPosition = otherPlayer.getChosenPlayerPosition();
-	this->playerType = otherPlayer.getPlayerType();
-
-	Card* tempChosenCard = otherPlayer.getChosenCard();
-
-	vector<Card*> otherFigureHand = otherPlayer.getFigureHand();
-	vector<Card*> newFigureHand;
-	vector<Card*> otherNumericHand = otherPlayer.getNumericHand();
-	vector<Card*> newNumericHand;
-
-	
-	for(vector<Card*>::iterator it = otherFigureHand.begin() ; it != otherFigureHand.end(); it++){
-
-		Card* card = new FigureCard(**it);
-		newFigureHand.push_back(card);
-
-		if(
-			otherPlayer.getChosenPlayerPosition() != -1 &&
-			tempChosenCard->isFigure() &&
-			Hand::compareShapes(card->getShape(), tempChosenCard->getShape()) == 0 &&
-			Hand::compareFigures(card->getStrValue(), tempChosenCard->getStrValue()) == 0
-			) {
-			
-			chosenCard = card;
-		}
-	}
-
-
-	for(vector<Card*>::iterator it = otherNumericHand.begin() ; it != otherNumericHand.end(); it++){
-
-		Card* card = new NumericCard(**it);
-		newNumericHand.push_back(card);
-
-		if(
-			otherPlayer.getChosenPlayerPosition() != -1 &&
-			tempChosenCard->isNumeric() &&
-			Hand::compareShapes(card->getShape(), tempChosenCard->getShape()) == 0 &&
-			Hand::compareNumbers(card->getStrValue(), tempChosenCard->getStrValue()) == 0
-			) {
-
-			chosenCard = card;
-		}
-	}
-	
-	this->receiveCards(newFigureHand);
-	this->receiveCards(newNumericHand);
-
+	this->copy(otherPlayer);
 }
 
 string Player::getName() const {
@@ -167,6 +117,69 @@ int Player::getPreviouslyChosenPlayerPosition() {
 int Player::getPlayerType() {
 
 	return playerType;
+}
+
+void Player::copy(Player& otherPlayer) {
+
+	this->name = otherPlayer.getName();
+	this->position = otherPlayer.getPosition();
+	this->chosenCardValue = getChosenCardValue();
+	this->previouslyChosenPlayerPosition = otherPlayer.getPreviouslyChosenPlayerPosition();
+	this->chosenPlayerPosition = otherPlayer.getChosenPlayerPosition();
+	this->playerType = otherPlayer.getPlayerType();
+
+	Card* tempChosenCard = otherPlayer.getChosenCard();
+
+	vector<Card*> otherFigureHand = otherPlayer.getFigureHand();
+	vector<Card*> newFigureHand;
+	vector<Card*> otherNumericHand = otherPlayer.getNumericHand();
+	vector<Card*> newNumericHand;
+
+	
+	for(vector<Card*>::iterator it = otherFigureHand.begin() ; it != otherFigureHand.end(); it++){
+
+		Card* card = new FigureCard(**it);
+		newFigureHand.push_back(card);
+
+		if(
+			otherPlayer.getChosenPlayerPosition() != -1 &&
+			tempChosenCard->isFigure() &&
+			Hand::compareShapes(card->getShape(), tempChosenCard->getShape()) == 0 &&
+			Hand::compareFigures(card->getStrValue(), tempChosenCard->getStrValue()) == 0
+			) {
+			
+			chosenCard = card;
+		}
+	}
+
+
+	for(vector<Card*>::iterator it = otherNumericHand.begin() ; it != otherNumericHand.end(); it++){
+
+		Card* card = new NumericCard(**it);
+		newNumericHand.push_back(card);
+
+		if(
+			otherPlayer.getChosenPlayerPosition() != -1 &&
+			tempChosenCard->isNumeric() &&
+			Hand::compareShapes(card->getShape(), tempChosenCard->getShape()) == 0 &&
+			Hand::compareNumbers(card->getStrValue(), tempChosenCard->getStrValue()) == 0
+			) {
+
+			chosenCard = card;
+		}
+	}
+	
+	this->receiveCards(newFigureHand);
+	this->receiveCards(newNumericHand);
+}
+
+Player& Player::operator=(Player& otherPlayer) {
+
+	if(this != &otherPlayer) {
+		this->copy(otherPlayer);
+	}
+
+	return *this;
 }
 
 
