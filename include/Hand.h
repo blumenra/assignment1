@@ -19,7 +19,6 @@ private:
 	// Declare here the collection of "Card *" of the hand
 public:
 	Hand();
-	Hand(const Hand& otherHand);
 	Hand(vector<Card*>& figureHand, vector<Card*>& numericHand);
 	// Hand(vector<Card*>&); // The right constructor!!!
 	bool addCard(Card &card);
@@ -45,8 +44,8 @@ public:
 	vector<Card*> giveCardsOfValue(Card& card);
 	vector<Card*> bundleCardsToGive(vector<Card*>& subHand, int begin, int end);
 	virtual ~Hand();
-	vector<Card*> getFigureHand() const;
-	vector<Card*> getNumericHand() const;
+	vector<Card*> getFigureHand();
+	vector<Card*> getNumericHand();
 };
 
 #endif
