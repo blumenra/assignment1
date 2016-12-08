@@ -16,12 +16,12 @@ private:
 	bool verbal;
 	int highestNumericValue;
 	int turn;
-	Deck deck;                 //The deck of the game
 	vector<Player *> players;  //The list of the players
 	vector<Player *> winners;
+	Deck deck;                 //The deck of the game
 
 	vector<string> parseConfigFile(char* configurationFile);
-	Deck deckCreator(string parsedDeck);
+	vector<Card*> deckCreator(string parsedDeck);
 	Shape stringToShape(string strShape);
 	Figure stringToFigure(string strFigure);
 	bool isFigure(string value);
@@ -29,13 +29,13 @@ private:
 	void deal();
 public:
 	Game(char* configurationFile);
-	Game(Game& otherGame);
+	Game(const Game& otherGame);
 	void init();
 	void play();
 	void printState();        //Print the state of the game as described in the assignment.
 	void printWinner();       //Print the winner of the game as describe in the assignment.
     void printNumberOfTurns(); //Print the number of played turns at any given time.  
-	bool isVerbal();
+	bool isVerbal() const;
 	bool areWinners();
 	bool singleWinner();
 	vector<Player *> getPlayers() const;
@@ -44,6 +44,7 @@ public:
 	int getTurn() const;
 	Deck getDeck() const;
 	vector<Player *> getWinners() const;
+	void copy(const Game& otherGame);
 };
 
 #endif

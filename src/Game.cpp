@@ -1,27 +1,33 @@
 #include <Game.h>
 
-Game::Game(char* configurationFile)
-:
-configFileVec(parseConfigFile(configurationFile)),
-verbal(stoi(configFileVec[0])),
-highestNumericValue(stoi(configFileVec[1])),
-turn(1),
-deck(deckCreator(configFileVec[2])),
-players(playersCreator(configFileVec)),
-winners()
-{
+Game::Game(char* configurationFile) {
+	
+	this->configFileVec = parseConfigFile(configurationFile);
+	this->verbal = stoi(configFileVec[0]);
+	this->highestNumericValue = stoi(configFileVec[1]);
+	this->turn = 1;
+
+	vector<Player *> players;
+	players = playersCreator(configFileVec);
+	this->players = players;
+
+	vector<Player*> winners;
+	this->winners = winners;
+
+	vector<Card*> cardVec;
+	cardVec = deckCreator(configFileVec[2]);
+	Deck tempDeck(cardVec);
+	this->deck = tempDeck;
+
+
+
 	configFileVec.clear();
 }
 
-// Game::Game(Game& otherGame):
-// configFileVec(),
-// verbal(otherGame.isVerbal()),
-// highestNumericValue(otherGame.getHighestNumericValue()),
-// turn(otherGame.getTurn()),
-// deck(otherGame.getDeck()),
-// players(otherGame.getPlayers()),
-// winners(otherGame.getWinners())
-// {}
+Game::Game(const Game& otherGame){
+
+	this->copy(otherGame);
+}
 
 vector<string> Game::parseConfigFile(char* configurationFile) {
 
@@ -43,7 +49,7 @@ vector<string> Game::parseConfigFile(char* configurationFile) {
 	return configFileVec;
 }
 
-Deck Game::deckCreator(string parsedDeck) {
+vector<Card*> Game::deckCreator(string parsedDeck) {
 
 	stringstream parsedDeckss(parsedDeck);
 
@@ -69,8 +75,8 @@ Deck Game::deckCreator(string parsedDeck) {
 			cards.push_back(new NumericCard(stringToShape(strShape), stoi(strValue)));
 		}
 	}
-	Deck deck(cards);
-	return deck;
+	
+	return cards;
 }
 
 Shape Game::stringToShape(string strShape) {
@@ -161,7 +167,7 @@ vector<Player *> Game::playersCreator(vector<string> configFileVec){
 	return players;
 }
 
-bool Game::isVerbal(){
+bool Game::isVerbal() const {
 
 	return verbal;
 }
@@ -235,11 +241,13 @@ void Game::play(){
 			if(isVerbal()){
 				printTurn();
 			}
-
+			
 			(*it)->goTurn(players, deck);
-
+			
+			Player* chosenPlayer = players[(*it)->getChosenPlayerPosition()];
+			
 			if(isVerbal()){
-				cout << (*it)->getName()  << " asked " << (*it)->getChosenPlayer()->getName()  << " for the value " << (*it)->getChosenCardValue() << endl;
+				cout << (*it)->getName()  << " asked " << chosenPlayer->getName()  << " for the value " << (*it)->getChosenCardValue() << endl;
 				cout << endl;
 			}
 
@@ -247,8 +255,8 @@ void Game::play(){
 				winners.push_back((*it));
 			}
 				
-			if((*it)->getChosenPlayer()->didIwin()){
-				winners.insert(winners.begin(), (*it)->getChosenPlayer());
+			if(chosenPlayer->didIwin()){
+				winners.insert(winners.begin(), chosenPlayer);
 			}
 
 			if(areWinners()){
@@ -281,27 +289,68 @@ vector<Player *> Game::getWinners() const {
 	return winners;
 }
 
-// void Game::copy(Game& otherGame) {
+void Game::copy(const Game& otherGame) {
 	
-// 	this->verbal = otherGame.isVerbal();
-// 	this->highestNumericValue = otherGame.getHighestNumericValue();
-// 	this->turn = otherGame.getTurn();
+	this->verbal = otherGame.isVerbal();
+	this->highestNumericValue = otherGame.getHighestNumericValue();
+	this->turn = otherGame.getTurn();
 	
-// 	this->deck = otherGame.getDeckVec();
+	Deck otherDeckv = Deck(otherGame.getDeck());
+	this->deck = otherDeckv;
 
-	
-// 	vector<Player *> players;
-// 	vector<Player *> winners;
-// }
+	vector<Player*> otherPlayers = otherGame.getPlayers();
+	vector<Player*> newPlayers;
 
 
-// Game& Game::operator=(Game& game) {
+	for(vector<Player*>::iterator it = otherPlayers.begin() ; it != otherPlayers.end(); it++){
 
-// 	if(this != &game) {
-		
-// 		this->copy(game);
-// 		// Game newGame(game);
-// 	}
+		cout << "it: " << (*it)->toString() << endl;
+		Player* tempPlayer;
 
-// 	return *this;
-// }
+		if((*it)->getPlayerType() == 1) {
+			cout << "it inside first if: " << (*it)->toString() << endl;
+			tempPlayer = new PlayerType1((**it));
+			cout << "it after first if: " << (*it)->toString() << endl;
+		}
+		else if((*it)->getPlayerType() == 2) {
+			tempPlayer = new PlayerType2((**it));
+		}
+		else if((*it)->getPlayerType() == 3) {
+			tempPlayer = new PlayerType3((**it));
+		}
+		else if((*it)->getPlayerType() == 4) {
+			tempPlayer = new PlayerType4((**it));
+		}
+
+		cout << "it before push: " << (*it)->toString() << endl;
+		newPlayers.push_back(tempPlayer);
+	}
+
+	this->players = newPlayers;
+
+
+	vector<Player*> otherWinners = otherGame.getWinners();
+	vector<Player*> newWinners;
+
+	for(vector<Player*>::iterator it = otherWinners.begin() ; it != otherWinners.end(); it++){
+
+		Player* tempWinner;
+
+		if((*it)->getPlayerType() == 1) {
+			tempWinner = new PlayerType1((**it));
+		}
+		else if((*it)->getPlayerType() == 2) {
+			tempWinner = new PlayerType2((**it));
+		}
+		else if((*it)->getPlayerType() == 3) {
+			tempWinner = new PlayerType3((**it));
+		}
+		else if((*it)->getPlayerType() == 4) {
+			tempWinner = new PlayerType4((**it));
+		}
+
+		newWinners.push_back(tempWinner);
+	}
+
+	this->winners = newWinners;
+}
