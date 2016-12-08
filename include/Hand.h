@@ -19,8 +19,6 @@ private:
 	// Declare here the collection of "Card *" of the hand
 public:
 	Hand();
-	Hand(vector<Card*>& figureHand, vector<Card*>& numericHand);
-	// Hand(vector<Card*>&); // The right constructor!!!
 	bool addCard(Card &card);
 	bool removeCard(Card &card);
 	int getNumberOfCards(); // Get the number of cards in hand

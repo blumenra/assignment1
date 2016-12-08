@@ -1,11 +1,9 @@
 #include <Hand.h>
 #include <Card.h>
 
-Hand::Hand() {}
-
-// CONSTRACTOR FOR DEBUGGING ONLY (can be removed later..)
-Hand::Hand(vector<Card*>& figureHand, vector<Card*>& numericHand)
-: figureHand(figureHand), numericHand(numericHand)
+Hand::Hand():
+figureHand(),
+numericHand()
 {}
 
 int Hand::getNumberOfCards() {
