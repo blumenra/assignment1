@@ -26,7 +26,7 @@ public:
 	string toString(); // Return the cards in top-to-bottom order in a single line, cards are separated by a space ex: "12S QD AS 3H"
 	vector<Card*> giveCards(int numberToGive);
 	~Deck();
-	void copy(const Deck& otherDeck);
+	vector<Card*> copy(const Deck& otherDeck);
 	Deck& operator=(Deck& otherDeck);
 };
 

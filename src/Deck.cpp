@@ -1,15 +1,17 @@
 #include <Deck.h>
 
-Deck::Deck() {}
+Deck::Deck():
+deck()
+{}
 
 //Deck Constructor
 Deck::Deck(vector<Card*>& deck):
 deck(deck)
 {}
 
-Deck::Deck(const Deck& otherDeck) {
-	copy(otherDeck);
-}
+Deck::Deck(const Deck& otherDeck):
+deck(copy(otherDeck))
+{}
 
 bool Deck::isEmpty(){
 	return this->deck.empty();
@@ -59,23 +61,16 @@ vector<Card*> Deck::giveCards(int numberToGive){
 	return cardsToGive;
 }
 
-// void DecK::deleteDeck() {
-
-// 	for(vector<Card*>::iterator it = deck.begin() ; it != deck.end(); it++){
-// 		delete (*it);
-// 	}
-// }
-
 vector<Card*> Deck::getDeckVec() const {
 
 	vector<Card*> newDeck = this->deck;
 	return newDeck;
 }
 
-void Deck::copy(const Deck& otherDeck) {
+vector<Card*> Deck::copy(const Deck& otherDeck) {
 
 	vector<Card*> copiedDeck;
-	this->deck = copiedDeck;
+	// this->deck = copiedDeck;
 	Card* tempCard;
 	vector<Card*> otherDeckVec = otherDeck.getDeckVec();
 
@@ -89,8 +84,11 @@ void Deck::copy(const Deck& otherDeck) {
 			tempCard = new NumericCard(**it);
 		}
 
-		this->deck.push_back(tempCard);
+		copiedDeck.push_back(tempCard);
 	}
+
+	this->deck = copiedDeck;
+	return copiedDeck;
 }
 
 Deck& Deck::operator=(Deck& otherDeck) {
