@@ -1,13 +1,14 @@
 #include <Deck.h>
 
+Deck::Deck() {}
+
 //Deck Constructor
 Deck::Deck(vector<Card*>& deck):
 deck(deck)
 {}
 
 Deck::Deck(const Deck& otherDeck) {
-	// cout << "otherDeck before copy: " << otherDeck.toString() << endl;
-	this->copy(otherDeck);
+	copy(otherDeck);
 }
 
 bool Deck::isEmpty(){
@@ -67,7 +68,6 @@ vector<Card*> Deck::giveCards(int numberToGive){
 
 vector<Card*> Deck::getDeckVec() const {
 
-	this->toString();
 	vector<Card*> newDeck = this->deck;
 	return newDeck;
 }
@@ -77,15 +77,9 @@ void Deck::copy(const Deck& otherDeck) {
 	vector<Card*> copiedDeck;
 	this->deck = copiedDeck;
 	Card* tempCard;
-	otherDeck.getDeckVec().begin();
-	otherDeck.getDeckVec().end();
-	cout << "vec empty? " << otherDeck.getDeckVec().empty() << endl;
-	cout << "vec siZe: " << otherDeck.getDeckVec().size() << endl;
+	vector<Card*> otherDeckVec = otherDeck.getDeckVec();
 
-	for(vector<Card*>::iterator it = otherDeck.getDeckVec().begin() ; it != otherDeck.getDeckVec().end(); it++){
-		cout << "it " << *it << endl;
-		// cout << "*it: " << (*it)->toString() << endl;
-		cout << "after toString" << endl;
+	for(vector<Card*>::iterator it = otherDeckVec.begin() ; it != otherDeckVec.end(); it++){
 		if((*it)->isFigure()){
 
 			tempCard = new FigureCard(**it);
@@ -101,7 +95,6 @@ void Deck::copy(const Deck& otherDeck) {
 
 Deck& Deck::operator=(Deck& otherDeck) {
 
-	cout << "hello" << endl;
 	if(this != &otherDeck) {
 		this->copy(otherDeck);
 	}

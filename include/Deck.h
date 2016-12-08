@@ -16,6 +16,7 @@ private:
 
 	void deleteDeck();
 public:
+	Deck();
 	Deck(vector<Card*>& deck);
 	Deck(const Deck& otherDeck);
 	vector<Card*> getDeckVec() const;
