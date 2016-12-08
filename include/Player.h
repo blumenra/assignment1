@@ -9,22 +9,23 @@ using namespace std;
 
 class Player : public Hand {
 private:
-	const string name;
-	const int position;
+	string name;
+	int position;
 	Card* chosenCard;
-	Player* chosenPlayer;
 	string chosenCardValue;
 
 protected:
 	int previouslyChosenPlayerPosition;
+	int chosenPlayerPosition;
+	int playerType;
 	
 public:
-	Player(string name, int position);
-	Player(const Player& otherPlayer);
+	Player(string name, int position, int playerType);
+	Player(Player& otherPlayer);
 	string getName() const;   //Returns the name of the player
 	Card* getChosenCard();
-	Player* getChosenPlayer();
-	int getPosition() const;
+	int getChosenPlayerPosition();
+	int getPosition();
 	string getChosenCardValue() const;
 	virtual void fetchFromDeck(Deck& deck, int amountToFetch);
 	virtual ~Player();
@@ -35,13 +36,14 @@ public:
 	Player* choosePlayerCyclicly(vector<Player*>& players, int previouslyChosenPlayerPosition);
 	virtual Player* choosePlayer(vector<Player*>& players) = 0;
 	virtual void goTurn(vector<Player *>& players, Deck& deck);
-	virtual int getPreviouslyChosenPlayerPosition() const;
+	virtual int getPreviouslyChosenPlayerPosition();
+	int getPlayerType();
 };
 
 class PlayerType1 : public Player {  //For strategy 1
 public:
 	PlayerType1(string name, int position);
-	PlayerType1(const Player& otherPlayerType1);
+	PlayerType1(Player& otherPlayerType1);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };
@@ -49,7 +51,7 @@ public:
 class PlayerType2 : public Player {  //For strategy 2
 public:
 	PlayerType2(string name, int position);
-	PlayerType2(const Player& otherPlayerType2);
+	PlayerType2(Player& otherPlayerType2);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };
@@ -57,7 +59,7 @@ public:
 class PlayerType3 : public Player {  //For strategy 3
 public:
 	PlayerType3(string name, int position);
-	PlayerType3(const Player& otherPlayerType3);
+	PlayerType3(Player& otherPlayerType3);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };
@@ -65,7 +67,7 @@ public:
 class PlayerType4 : public Player {  //For strategy 4
 public:
 	PlayerType4(string name, int position);
-	PlayerType4(const Player& otherPlayerType4);
+	PlayerType4(Player& otherPlayerType4);
 	Card* chooseCardToRequest();
 	Player* choosePlayer(vector<Player*>& players);
 };

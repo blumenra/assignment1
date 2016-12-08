@@ -1,30 +1,80 @@
  #include <Player.h>
 
-Player::Player(string name, int position):
+Player::Player(string name, int position, int playerType):
 Hand(),
 name(name),
 position(position),
 chosenCardValue(""),
-previouslyChosenPlayerPosition(-1)
+previouslyChosenPlayerPosition(-1),
+chosenPlayerPosition(-1),
+playerType(playerType)
 {}
 
-Player::Player(const Player& otherPlayer):
-Hand(otherPlayer),
-name(otherPlayer.getName()),
-position(otherPlayer.getPosition()),
-chosenCardValue(""),
-previouslyChosenPlayerPosition(-1)
-{}
+Player::Player(Player& otherPlayer) {
+	
+	this->name = otherPlayer.getName();
+	this->position = otherPlayer.getPosition();
+	this->chosenCardValue = getChosenCardValue();
+	this->previouslyChosenPlayerPosition = otherPlayer.getPreviouslyChosenPlayerPosition();
+	this->chosenPlayerPosition = otherPlayer.getChosenPlayerPosition();
+	this->playerType = otherPlayer.getPlayerType();
+
+	Card* tempChosenCard = otherPlayer.getChosenCard();
+
+	vector<Card*> otherFigureHand = otherPlayer.getFigureHand();
+	vector<Card*> newFigureHand;
+	vector<Card*> otherNumericHand = otherPlayer.getNumericHand();
+	vector<Card*> newNumericHand;
+
+	
+	for(vector<Card*>::iterator it = otherFigureHand.begin() ; it != otherFigureHand.end(); it++){
+
+		Card* card = new FigureCard(**it);
+		newFigureHand.push_back(card);
+
+		if(
+			otherPlayer.getChosenPlayerPosition() != -1 &&
+			tempChosenCard->isFigure() &&
+			Hand::compareShapes(card->getShape(), tempChosenCard->getShape()) == 0 &&
+			Hand::compareFigures(card->getStrValue(), tempChosenCard->getStrValue()) == 0
+			) {
+			
+			chosenCard = card;
+		}
+	}
+
+
+	for(vector<Card*>::iterator it = otherNumericHand.begin() ; it != otherNumericHand.end(); it++){
+
+		Card* card = new NumericCard(**it);
+		newNumericHand.push_back(card);
+
+		if(
+			otherPlayer.getChosenPlayerPosition() != -1 &&
+			tempChosenCard->isNumeric() &&
+			Hand::compareShapes(card->getShape(), tempChosenCard->getShape()) == 0 &&
+			Hand::compareNumbers(card->getStrValue(), tempChosenCard->getStrValue()) == 0
+			) {
+
+			chosenCard = card;
+		}
+	}
+	
+	this->receiveCards(newFigureHand);
+	this->receiveCards(newNumericHand);
+
+}
 
 string Player::getName() const {
+
 	return name;
 }
 
-int Player::getPosition() const {
+int Player::getPosition() {
 	return position;
 }
 
-string Player::getChosenCardValue() const{
+string Player::getChosenCardValue() const {
 
 	return chosenCardValue;
 }
@@ -66,6 +116,8 @@ Player* Player::choosePlayerWithMostCards(vector<Player*>& players) {
 		}
 	}
 
+	chosenPlayerPosition = chosenPlayer->getPosition();
+
 	return chosenPlayer;
 }
 
@@ -85,7 +137,7 @@ void Player::goTurn(vector<Player *>& players, Deck& deck) {
 
 	chosenCard = this->chooseCardToRequest();
 	chosenCardValue = chosenCard->getStrValue();
-	chosenPlayer = this->choosePlayer(players);
+	Player* chosenPlayer = this->choosePlayer(players);
 
 	vector<Card*> givenCards = chosenPlayer->giveCardsOfValue(*chosenCard);
 	if(!givenCards.empty()) {
@@ -102,24 +154,29 @@ Card* Player::getChosenCard() {
 	return chosenCard;
 }
 
-Player* Player::getChosenPlayer() {
+int Player::getChosenPlayerPosition() {
 	
-	return chosenPlayer;
+	return chosenPlayerPosition;
 }
 
-int Player::getPreviouslyChosenPlayerPosition() const {
+int Player::getPreviouslyChosenPlayerPosition() {
 	
 	return previouslyChosenPlayerPosition;
+}
+
+int Player::getPlayerType() {
+
+	return playerType;
 }
 
 
 /****PlayerType1****/
 
 PlayerType1::PlayerType1(string name, int position)
-: Player(name, position)
+: Player(name, position, 1)
 {}
 
-PlayerType1::PlayerType1(const Player& otherPlayerType1):
+PlayerType1::PlayerType1(Player& otherPlayerType1):
 Player(otherPlayerType1)
 {}
 
@@ -206,10 +263,10 @@ Player* PlayerType1::choosePlayer(vector<Player*>& players){
 /****PlayerType2****/
 
 PlayerType2::PlayerType2(string name, int position)
-: Player(name, position)
+: Player(name, position, 2)
 {}
 
-PlayerType2::PlayerType2(const Player& otherPlayerType2):
+PlayerType2::PlayerType2(Player& otherPlayerType2):
 Player(otherPlayerType2)
 {}
 
@@ -331,10 +388,10 @@ Player* PlayerType2::choosePlayer(vector<Player*>& players){
 
 /****PlayerType3****/
 PlayerType3::PlayerType3(string name, int position)
-: Player(name, position)
+: Player(name, position, 3)
 {}
 
-PlayerType3::PlayerType3(const Player& otherPlayerType3):
+PlayerType3::PlayerType3(Player& otherPlayerType3):
 Player(otherPlayerType3)
 {}
 
@@ -359,8 +416,11 @@ Card* PlayerType3::chooseCardToRequest() {
 }
 
 Player* PlayerType3::choosePlayer(vector<Player*>& players){
+	
 	Player* chosenPlayer = choosePlayerCyclicly(players, previouslyChosenPlayerPosition);
 	previouslyChosenPlayerPosition = chosenPlayer->getPosition();
+	chosenPlayerPosition = chosenPlayer->getPosition();
+
 	return chosenPlayer;
 }
 
@@ -369,10 +429,10 @@ Player* PlayerType3::choosePlayer(vector<Player*>& players){
 
 /****PlayerType4****/
 PlayerType4::PlayerType4(string name, int position)
-: Player(name, position)
+: Player(name, position, 4)
 {}
 
-PlayerType4::PlayerType4(const Player& otherPlayerType4):
+PlayerType4::PlayerType4(Player& otherPlayerType4):
 Player(otherPlayerType4)
 {}
 
@@ -397,8 +457,11 @@ Card* PlayerType4::chooseCardToRequest() {
 }
 
 Player* PlayerType4::choosePlayer(vector<Player*>& players){
+	
 	Player* chosenPlayer = choosePlayerCyclicly(players, previouslyChosenPlayerPosition);
 	previouslyChosenPlayerPosition = chosenPlayer->getPosition();
+	chosenPlayerPosition = chosenPlayer->getPosition();
+
 	return chosenPlayer;
 }
 
