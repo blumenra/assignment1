@@ -354,3 +354,14 @@ void Game::copy(const Game& otherGame) {
 
 	this->winners = newWinners;
 }
+
+Game::~Game() {
+
+	for(vector<Player*>::iterator it = players.begin() ; it != players.end(); it++){
+		delete (*it);
+	}
+
+	for(vector<Player*>::iterator it = winners.begin() ; it != winners.end(); it++){
+		delete (*it);
+	}
+}

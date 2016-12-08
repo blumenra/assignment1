@@ -45,6 +45,7 @@ public:
 	Deck getDeck() const;
 	vector<Player *> getWinners() const;
 	void copy(const Game& otherGame);
+	~Game();
 };
 
 #endif
