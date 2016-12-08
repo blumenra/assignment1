@@ -4,13 +4,23 @@ Player::Player(string name, int position, int playerType):
 Hand(),
 name(name),
 position(position),
+chosenCard(),
 chosenCardValue(""),
 previouslyChosenPlayerPosition(-1),
 chosenPlayerPosition(-1),
 playerType(playerType)
 {}
 
-Player::Player(Player& otherPlayer) {
+Player::Player(Player& otherPlayer):
+Hand(),
+name(),
+position(),
+chosenCard(),
+chosenCardValue(),
+previouslyChosenPlayerPosition(),
+chosenPlayerPosition(),
+playerType()
+{
 	
 	this->copy(otherPlayer);
 }

@@ -1,6 +1,14 @@
 #include <Game.h>
 
-Game::Game(char* configurationFile) {
+Game::Game(char* configurationFile):
+configFileVec(),
+verbal(),
+highestNumericValue(),
+turn(),
+players(),
+winners(),
+deck()
+{
 	
 	this->configFileVec = parseConfigFile(configurationFile);
 	this->verbal = stoi(configFileVec[0]);
@@ -24,7 +32,15 @@ Game::Game(char* configurationFile) {
 	configFileVec.clear();
 }
 
-Game::Game(const Game& otherGame){
+Game::Game(const Game& otherGame):
+configFileVec(),
+verbal(),
+highestNumericValue(),
+turn(),
+players(),
+winners(),
+deck()
+{
 
 	this->copy(otherGame);
 }
