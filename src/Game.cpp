@@ -304,13 +304,10 @@ void Game::copy(const Game& otherGame) {
 
 	for(vector<Player*>::iterator it = otherPlayers.begin() ; it != otherPlayers.end(); it++){
 
-		cout << "it: " << (*it)->toString() << endl;
 		Player* tempPlayer;
 
 		if((*it)->getPlayerType() == 1) {
-			cout << "it inside first if: " << (*it)->toString() << endl;
 			tempPlayer = new PlayerType1((**it));
-			cout << "it after first if: " << (*it)->toString() << endl;
 		}
 		else if((*it)->getPlayerType() == 2) {
 			tempPlayer = new PlayerType2((**it));
@@ -322,7 +319,6 @@ void Game::copy(const Game& otherGame) {
 			tempPlayer = new PlayerType4((**it));
 		}
 
-		cout << "it before push: " << (*it)->toString() << endl;
 		newPlayers.push_back(tempPlayer);
 	}
 
@@ -356,12 +352,7 @@ void Game::copy(const Game& otherGame) {
 }
 
 Game::~Game() {
-
 	for(vector<Player*>::iterator it = players.begin() ; it != players.end(); it++){
-		delete (*it);
-	}
-
-	for(vector<Player*>::iterator it = winners.begin() ; it != winners.end(); it++){
 		delete (*it);
 	}
 }
