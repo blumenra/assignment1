@@ -6,7 +6,7 @@ Card::Card(Shape shape):
 shape(shape)
 {}
 
-Shape Card::getShape() const {
+Shape Card::getShape() {
 	return this->shape;
 }
 
@@ -28,7 +28,7 @@ string Card::shapeToString(Shape shape) {
 
 Card::~Card() {}
 
-bool Card::isNumeric() const {
+bool Card::isNumeric() {
 
 	return !this->isFigure();
 }
@@ -58,7 +58,7 @@ string FigureCard::toString() {
 	return strCard;
 }
 
-string FigureCard::figureToString(Figure figure) const {
+string FigureCard::figureToString(Figure figure) {
 		
 	switch(figure) {
 		case Jack:
@@ -80,7 +80,7 @@ vector<int> FigureCard::valuateMe(Hand& hand) {
 }
 
 
-Figure FigureCard::stringToFigure(string strFigure) const {
+Figure FigureCard::stringToFigure(string strFigure)  {
 	
 	Figure figureJ(Jack);
 	Figure figureQ(Queen);
@@ -104,7 +104,7 @@ Figure FigureCard::stringToFigure(string strFigure) const {
 	}
 }
 
-bool FigureCard::isFigure() const {
+bool FigureCard::isFigure() {
 
 	return true;
 }
@@ -139,7 +139,7 @@ vector<int> NumericCard::valuateMe(Hand& hand) {
 	return hand.findCardsByValue(*this);
 }
 
-bool NumericCard::isFigure() const {
+bool NumericCard::isFigure() {
 
 	return false;
 }
